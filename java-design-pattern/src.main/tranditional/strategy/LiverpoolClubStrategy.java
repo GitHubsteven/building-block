@@ -7,13 +7,13 @@ public class LiverpoolClubStrategy implements IClubIntroStrategy {
         System.out.println("Liverpool FC");
     }
 
-    @Override
-    public void age() {
-        System.out.println(120);
-    }
-
-    @Override
-    public void city() {
-        System.out.println("Liverpool");
-    }
+//    @Override
+//    public void age() {
+//        System.out.println(120);
+//    }
+//
+//    @Override
+//    public void city() {
+//        System.out.println("Liverpool");
+//    }
 }

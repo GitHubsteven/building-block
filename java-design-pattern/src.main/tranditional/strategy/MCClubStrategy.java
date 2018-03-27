@@ -6,13 +6,13 @@ public class MCClubStrategy implements IClubIntroStrategy {
         System.out.println("Manchester City FC");
     }
 
-    @Override
-    public void age() {
-        System.out.println(98);
-    }
-
-    @Override
-    public void city() {
-        System.out.println("Manchester");
-    }
+//    @Override
+//    public void age() {
+//        System.out.println(98);
+//    }
+//
+//    @Override
+//    public void city() {
+//        System.out.println("Manchester");
+//    }
 }
