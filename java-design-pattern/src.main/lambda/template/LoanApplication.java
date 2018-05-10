@@ -6,7 +6,7 @@ package lambda.template;
  * @Description:
  * @Date: Created at 22:26 2018/3/21.
  */
-public abstract class LoadApplication {
+public abstract class LoanApplication {
     public void checkLoadApplication() throws Exception{
         checkId();
         checkIncomeHis();
@@ -20,5 +20,5 @@ public abstract class LoadApplication {
 
     private void reportFindings(){
 
-    };
+    }
 }
