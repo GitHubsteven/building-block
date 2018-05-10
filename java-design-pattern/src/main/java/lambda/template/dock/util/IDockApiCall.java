@@ -1,9 +1,7 @@
 package lambda.template.dock.util;
 
-import org.springframework.cglib.core.internal.Function;
-import org.springframework.stereotype.Service;
-
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
@@ -11,7 +9,6 @@ import java.util.function.Consumer;
  * @Description:
  * @Date: Created at 17:05 2018/5/8.
  */
-@Service
 public interface IDockApiCall {
     /**
      * 调用api 返回

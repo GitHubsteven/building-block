@@ -1,6 +1,7 @@
 package lambda.template.dock.util;
 
-import org.springframework.cglib.core.internal.Function;
+
+import java.util.function.Function;
 
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.

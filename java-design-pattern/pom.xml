@@ -10,16 +10,7 @@
     </properties>
 
     <groupId>java-deve-dir</groupId>
-    <artifactId>design-pattern</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>java-design-pattern</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>java-deve-util</module>
-        <module>java-design-pattern</module>
-        <module>service</module>
-    </modules>
-
-    <build>
-
-    </build>
 </project>

@@ -1,8 +1,8 @@
 package lambda.template.dock.util;
 
-import org.springframework.cglib.core.internal.Function;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
