@@ -1,4 +1,4 @@
-package tranditional.proxy;
+package tranditional.proxy.static_proxy;
 
 public class IOrderServiceImplProxy implements IOrderService{
     /*you can inject it in spring */

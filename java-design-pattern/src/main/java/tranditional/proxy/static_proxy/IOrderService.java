@@ -1,4 +1,4 @@
-package tranditional.proxy;
+package tranditional.proxy.static_proxy;
 
 public interface IOrderService {
     /**
