@@ -23,8 +23,8 @@ import org.apache.http.util.CharArrayBuffer;
  * of HTTP request execution and connection management.
  * @version: 1.0.0
  */
-public class ClientConfiguration {
-    public final static void main(String[] args) {
+public final class ClientConfiguration {
+    public static void main(String[] args) {
         //use custom message parse /writer to customize the way http
         //messages are paresed from and written out to the data stream
         HttpMessageParserFactory<HttpResponse> responseParserFactory = new
