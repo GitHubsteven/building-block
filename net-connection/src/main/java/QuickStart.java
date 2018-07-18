@@ -104,16 +104,13 @@ public class QuickStart {
         try (CloseableHttpClient httpClient = HttpClientUtils.buildHttpClient()) {
             HttpGet httpGet = new HttpGet("https://www.baidu.com/");
 
-            ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
-                @Override
-                public String handleResponse(final HttpResponse httpResponse) throws IOException {
-                    int statusCode = httpResponse.getStatusLine().getStatusCode();
-                    if (statusCode >= 200 && statusCode < 300) {
-                        HttpEntity entity = httpResponse.getEntity();
-                        return entity != null ? EntityUtils.toString(entity) : null;
-                    } else {
-                        throw new ClientProtocolException("unexcepted response: " + statusCode);
-                    }
+            ResponseHandler<String> responseHandler = httpResponse -> {
+                int statusCode = httpResponse.getStatusLine().getStatusCode();
+                if (statusCode >= 200 && statusCode < 300) {
+                    HttpEntity entity = httpResponse.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("unexcepted response: " + statusCode);
                 }
             };
             String responseBody = httpClient.execute(httpGet, responseHandler);
@@ -121,10 +118,6 @@ public class QuickStart {
             System.out.println(responseBody);
         }
     }
-
-
-
-
 
 
     private static void printResp(CloseableHttpResponse response2) throws IOException {
