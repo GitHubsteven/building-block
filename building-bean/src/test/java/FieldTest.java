@@ -1,3 +1,7 @@
+import bean.BaseModel;
+import bean.SubModel1;
+import bean.SubModel2;
+
 import java.util.ArrayList;
 import java.util.List;
 

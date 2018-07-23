@@ -1,3 +1,6 @@
+package bean;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,7 +13,36 @@ import java.util.List;
  * @version: 1.0.0
  */
 public class BaseModel {
-    private String name = "BaseModel";
+    private Long id;
+    private Date modified;
+    private String modifier;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier;
+    }
+
+    private String name = "bean.BaseModel";
 
     public String getName() {
         return name;

@@ -1,3 +1,5 @@
+package bean;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -8,5 +10,5 @@
  * @version: 1.0.0
  */
 public class SubModel2 extends BaseModel {
-    String name = "SubModel2";
+    String name = "bean.SubModel2";
 }

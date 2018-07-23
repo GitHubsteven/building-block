@@ -1,3 +1,5 @@
+package bean;
+
 import java.util.List;
 
 /**
@@ -10,7 +12,16 @@ import java.util.List;
  * @version: 1.0.0
  */
 public class SubModel1 extends BaseModel {
-    private String name = "SubModel1";
+    private String name = "bean.SubModel1";
+    private Integer age;
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     public void self() {
         System.out.println("name: " + name);

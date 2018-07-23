@@ -13,6 +13,7 @@
         <module>net-connection</module>
         <module>building-util</module>
         <module>building-bean</module>
+        <module>building-generic</module>
     </modules>
 
     <dependencyManagement>
