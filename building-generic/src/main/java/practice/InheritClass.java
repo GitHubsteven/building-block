@@ -21,7 +21,11 @@ public class InheritClass {
         intruduce(subModel);
     }
 
-    private static <T extends BaseModel> void intruduce(T baseModel) {
+//    private static <T extends BaseModel> void intruduce(T baseModel) {
+//        System.out.println(baseModel.toString());
+//    }
+
+    private static void intruduce(BaseModel baseModel) {
         System.out.println(baseModel.toString());
     }
 

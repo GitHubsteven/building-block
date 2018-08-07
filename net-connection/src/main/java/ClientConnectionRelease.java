@@ -3,6 +3,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
+import util.HttpClientUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
