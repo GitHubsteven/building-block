@@ -7,14 +7,6 @@
     <groupId>com.asa.building</groupId>
     <artifactId>building-block</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.asa.building</groupId>
-            <artifactId>building-bean</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
     <packaging>pom</packaging>
 
     <modules>
@@ -25,6 +17,7 @@
         <module>building-generic</module>
         <module>building-algorithm</module>
         <module>building-reflect</module>
+        <module>building-graphic</module>
     </modules>
 
     <properties>
@@ -54,7 +47,6 @@
                 <version>3.7</version>
             </dependency>
 
-
             <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -71,14 +63,6 @@
                 <optional>true</optional>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.7</version>
-            </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
@@ -87,7 +71,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

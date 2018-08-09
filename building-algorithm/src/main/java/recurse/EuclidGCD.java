@@ -1,6 +1,6 @@
 package recurse;
 
-import annotation.Algolrithm;
+//import annotation.Algolrithm;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +17,7 @@ public class EuclidGCD {
         System.out.println(gcd);
     }
 
-    @Algolrithm
+//    @Algolrithm
     public static int euclidGcd(int first, int second) {
         int temp = first % second;
         if (temp == 0) return second;
