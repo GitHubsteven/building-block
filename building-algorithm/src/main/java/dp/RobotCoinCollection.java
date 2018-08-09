@@ -1,7 +1,5 @@
 package dp;
 
-import java.util.Random;
-
 /**
  * Created with IntelliJ IDEA.
  *
@@ -13,15 +11,9 @@ import java.util.Random;
  * @version: 1.0.0
  */
 public class RobotCoinCollection {
+
     public static void main(String[] args) {
-        int[][] grid = new int[10][6];
-        Random random = new Random();
-        for (int[] raw : grid) {
-            for (int col : raw) {
-                col = random.nextInt(2);
-            }
-        }
-//        CollectionHelper.print2Demension(grid);
+        System.out.println(1);
     }
 
     static int robotCoinCollection(int[][] grid) {

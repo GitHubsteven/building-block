@@ -1,6 +1,7 @@
 package dp;
 
 import javafx.scene.AmbientLight;
+import util.CollectionHelper;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ public class SplitOrder {
         //验证没有新成员增加到组中了
         if (may.size() == 0) return now;
         if (now.size() >= CNT_MAX) return now;
-        Integer sumNow = sumList(now);
+        Integer sumNow = CollectionHelper.sumList(now);
         if (sumNow + may.get(0) > AMOUNT_MAX) return now;
         //说明是一定有可以新加的成员的
         int stop = -1;                   // 在may中可以放在now组中的最大索引
@@ -67,7 +68,7 @@ public class SplitOrder {
         return findGroup(now, may);
     }
 
-    private static Integer sumList(Collection<Integer> numbers) {
+    public static Integer sumList(Collection<Integer> numbers) {
         Integer sum = 0;
         for (Integer number : numbers) {
             sum += number;

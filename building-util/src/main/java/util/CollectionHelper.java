@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Collection;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -17,5 +19,13 @@ public class CollectionHelper {
             }
             System.out.println();
         }
+    }
+
+    public static Integer sumList(Collection<Integer> numbers) {
+        Integer sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 }

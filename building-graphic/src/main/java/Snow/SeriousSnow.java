@@ -42,7 +42,8 @@ class hua extends JPanel implements Runnable {//画布
 
     public hua() {
         try {
-            img = ImageIO.read(new File("LZG雪花.png"));//加载雪花图片
+
+            img = ImageIO.read(new File(ClassLoader.getSystemResource("snow.png").getFile()));//加载雪花图片
         } catch (IOException e) {
             e.printStackTrace();
         }
