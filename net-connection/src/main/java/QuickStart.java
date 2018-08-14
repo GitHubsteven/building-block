@@ -47,8 +47,8 @@ import java.util.List;
 public class QuickStart {
 
     public static void main(String[] args) throws Exception {
-//        clientAsk();
-        clientWithRespHandler();
+        clientAsk();
+//        clientWithRespHandler();
     }
 
     private static void clientAsk() throws IOException {
@@ -65,7 +65,7 @@ public class QuickStart {
             printResp(response1);
 
             HttpPost httpPost = new HttpPost("http://httpbin.org/post");
-            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+            List<NameValuePair> nvps = new ArrayList<>();
             nvps.add(new BasicNameValuePair("username", "vip"));
             nvps.add(new BasicNameValuePair("password", "secret"));
             httpPost.setEntity(new UrlEncodedFormEntity(nvps));

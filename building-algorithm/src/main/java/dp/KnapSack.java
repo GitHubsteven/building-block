@@ -44,10 +44,10 @@ public class KnapSack {
     /**
      * 回溯
      *
-     * @param value
-     * @param goodNo
+     * @param value         当前价值
+     * @param goodNo        物品号
      * @param packageWeight 背包重量，不为0
-     * @return
+     * @return 被选择的物品
      */
     static int trackBack(int value, int goodNo, int packageWeight) {
         if (value == 0) {
