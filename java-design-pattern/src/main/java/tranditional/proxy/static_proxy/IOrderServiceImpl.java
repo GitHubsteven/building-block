@@ -1,4 +1,4 @@
-package tranditional.proxy;
+package tranditional.proxy.static_proxy;
 
 /**
  * Following is the illustration of the tranditional.command pattern
