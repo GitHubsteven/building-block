@@ -1,7 +1,6 @@
 package tranditional.proxy.dynamic.cglibdyn;
 
-import tranditional.proxy.IOrderService;
-import tranditional.proxy.IOrderServiceImpl;
+import tranditional.proxy.static_proxy.IOrderServiceImpl;
 
 /**
  * Created with IntelliJ IDEA.

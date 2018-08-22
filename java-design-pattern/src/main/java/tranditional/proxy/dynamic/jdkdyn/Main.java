@@ -1,7 +1,8 @@
 package tranditional.proxy.dynamic.jdkdyn;
 
-import tranditional.proxy.IOrderService;
-import tranditional.proxy.IOrderServiceImpl;
+
+import tranditional.proxy.static_proxy.IOrderService;
+import tranditional.proxy.static_proxy.IOrderServiceImpl;
 
 import java.lang.reflect.Proxy;
 

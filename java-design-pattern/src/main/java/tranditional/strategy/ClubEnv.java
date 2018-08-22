@@ -1,7 +1,7 @@
 package tranditional.strategy;
 
 /**
- * introduce club
+ * introduce.md club
  *
  * Created by rongbin.xie on 2018/3/21.
  */
