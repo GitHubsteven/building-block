@@ -2,9 +2,11 @@ package converter.json.fastjson;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.annotation.JSONType;
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.ObjectSerializer;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import lombok.Data;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -52,7 +54,7 @@ public class FastJsonExample {
     }
 
 
-    public void specifiedEffect(){
+    public void specifiedEffect() {
         Word word = new Word();
         word.setA("a");
         word.setB(2);
@@ -69,13 +71,12 @@ public class FastJsonExample {
                 SerializerFeature.WriteNullListAsEmpty));
     }
 
-    public void customSerTest(){
+    public void customSerTest() {
         CusModel model = new CusModel();
         model.value = 100;
         String json = JSON.toJSONString(model);
         System.out.println(json);
     }
-
 
 
     public static class CusModel {
@@ -91,5 +92,13 @@ public class FastJsonExample {
             String text = value + "元";
             serializer.write(text);
         }
+    }
+
+    @JSONType(alphabetic = false)
+    @Data
+    public static class B {
+        public int f2;
+        public int f1;
+        public int f0;
     }
 }
