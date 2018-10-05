@@ -21,7 +21,7 @@ public class CollectionHelper {
     public static void print2Dimension(int[][] data) {
         for (int[] raw : data) {
             for (int col : raw) {
-                System.out.print(col + " ");
+                System.out.print(String.format("%2d ", col));
             }
             System.out.println();
         }
