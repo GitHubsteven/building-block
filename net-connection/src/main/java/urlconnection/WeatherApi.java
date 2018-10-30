@@ -23,6 +23,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,6 +37,7 @@ import java.util.Map;
  */
 public class WeatherApi extends BaseApiCall {
     private static final String API_URL = "https://www.sojson.com/open/api/weather/json.shtml?";
+
 
     public static void main(String[] args) {
         Map<String, Object> params = new HashMap<>();
