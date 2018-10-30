@@ -14,13 +14,14 @@ public class KnapSack {
     private static int[] weight = {2, 1, 3, 2};
 
     public static void main(String[] args) {
-//        for (int i = 0; i <= 4; i++) {
-//            for (int j = 0; j <= 5; j++) {
-//                System.out.print(String.format("%02d ", getMaxVal(i, j)));
-//            }
-//            System.out.println();
-//        }
-        int track = trackBack(37, 4, 5);
+        int MAX_WEIGHT = 5;
+        for (int i = 0; i <= 4; i++) {
+            for (int j = 0; j <= MAX_WEIGHT; j++) {
+                System.out.print(String.format("%02d ", getMaxVal(i, j)));
+            }
+            System.out.println();
+        }
+//        int track = trackBack(37, 4, 5);
     }
 
     /**
