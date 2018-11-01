@@ -19,6 +19,7 @@
         <module>building-reflect</module>
         <module>building-graphic</module>
         <module>building-converter</module>
+        <module>building-optimize</module>
     </modules>
 
     <properties>
