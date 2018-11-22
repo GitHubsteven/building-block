@@ -46,4 +46,12 @@ public class InvItem implements Serializable {
             throw new IllegalArgumentException("quantity(物理库存)不能为空");
         }
     }
+
+    @Override
+    public String toString() {
+        return "InvItem{" +
+                "skuCode='" + skuCode + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

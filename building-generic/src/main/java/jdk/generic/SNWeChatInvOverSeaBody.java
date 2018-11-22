@@ -9,5 +9,5 @@ import annotation.VOMQQueue;
  * @Date: Created at 16:04 2018/11/22.
  */
 @VOMQQueue("vo_mq_sn_xcx2_inventory_update")
-public class SNInvOverSeaBody extends SNBaseInvBody {
+public class SNWeChatInvOverSeaBody extends SNBaseInvBody {
 }

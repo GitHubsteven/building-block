@@ -56,4 +56,13 @@ public class OrderStatusItem implements Serializable {
         this.orderStatus = orderStatus;
         this.trackingNumber = trackingNumber;
     }
+
+    @Override
+    public String toString() {
+        return "OrderStatusItem{" +
+                "orderNumber='" + orderNumber + '\'' +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", trackingNumber='" + trackingNumber + '\'' +
+                '}';
+    }
 }

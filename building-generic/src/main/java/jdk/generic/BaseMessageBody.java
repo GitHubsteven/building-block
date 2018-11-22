@@ -8,7 +8,7 @@ import java.util.List;
  * @Description:
  * @Date: Created at 14:39 2018/11/22.
  */
-public abstract class BaseMessageBody<T> extends BaseMQMessageBody {
+public class BaseMessageBody<T> extends BaseMQMessageBody {
     List<T> items;
 
     public List<T> getItems() {
@@ -17,5 +17,10 @@ public abstract class BaseMessageBody<T> extends BaseMQMessageBody {
 
     public void setItems(List<T> items) {
         this.items = items;
+    }
+
+    @Override
+    void check() {
+
     }
 }
