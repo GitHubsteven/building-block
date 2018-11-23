@@ -35,4 +35,8 @@ public class BoxTest {
     public static void doubleGeneric(Box<Collection> param) {
 
     }
+
+    public static <T> void box(Box<T> param) {
+        System.out.println(param.getValue());
+    }
 }
