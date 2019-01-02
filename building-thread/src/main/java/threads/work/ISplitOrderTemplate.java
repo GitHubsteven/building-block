@@ -260,6 +260,7 @@ public abstract class ISplitOrderTemplate<T extends Comparable<T>> implements IS
             numCount = 0;
         }
 
+        System.out.println(Thread.currentThread().getName() + " end-------------------");
         return targetGroups;
     }
 

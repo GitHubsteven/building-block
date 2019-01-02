@@ -7,12 +7,19 @@ import java.util.List;
 public class BigDecimalSplitOrderTest {
     public static void main(String[] args) {
         List<BigDecimal> dataSet = getDateSet();
-        List<List<BigDecimal>> maxGroups = BigDecimalSplitOrder.instance()
+        BigDecimalSplitOrder isplitOrder = BigDecimalSplitOrder.instance();
+        List<List<BigDecimal>> maxGroups = isplitOrder
                 .getMaxValOfCombines(dataSet, new BigDecimal("100"), Math.floorDiv(dataSet.size(), 2), BigDecimal::add, BigDecimal.ZERO);
         maxGroups.forEach(it -> {
             System.out.println("----------------------------");
             it.forEach(el -> System.out.print(el + "\n"));
         });
+
+//        isplitOrder.listCombines(dataSet,BigDecimal::add, new BigDecimal("800"), BigDecimal.ZERO, 30);
+
+
+
+
     }
 
     private static List<BigDecimal> getDateSetFromStr() {
