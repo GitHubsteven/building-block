@@ -15,6 +15,7 @@ public class BigDecimalSplitOrderTest {
             it.forEach(el -> System.out.print(el + "\n"));
         });
 
+        // TODO: 2019/1/3 其实很不明白，虽然用了executors 框架，但是仍然没有感觉出多线程的优势。 或者说这样的写法没有看出是多线程
 //        isplitOrder.listCombines(dataSet,BigDecimal::add, new BigDecimal("800"), BigDecimal.ZERO, 30);
 
 
