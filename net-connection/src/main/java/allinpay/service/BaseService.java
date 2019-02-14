@@ -87,7 +87,7 @@ public class BaseService  {
         } catch (JsonProcessingException e) {
             throw new AllinpayApiException("生成post请求参数时出现异常!");
         }
-//        $info("{}请求参数为：{}", request.getService(), formParam.toString());
+        //设置参数，post中的参数，同时传入
         req.bodyString(joinParam2String(formParam), ContentType.APPLICATION_FORM_URLENCODED.withCharset(StandardCharsets.UTF_8));
 
         if (config.hasProxy()) {
