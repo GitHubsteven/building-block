@@ -46,6 +46,7 @@ https://www.apiopen.top/addStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5&ty
 |  请求参数3|  typeId=1|
 |  请求参数4|  count=2|
 
+##### Get api的调用
 **url = 协议+dns:https://www.apiopen.top/addStatistics**
 
 1. 因为是Get方法，所以我们需要建立一个Get的基本请求：
@@ -72,90 +73,108 @@ https://www.apiopen.top/addStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5&ty
 	            }
 	            System.out.println("------------调用api返回结果为：" + respJson);
 	 ```
- 最后代码：
+##### Post Api的调用
+然而在post的Api中，可能会有些许不同（但是上面的模拟客户端和创建执行者，解析url的步骤是一样的），因为在post中，参数不是拼接在url后面用“？”相加起来的，我们需要把参数用另外一种方式来放在Request中，基于如下接口信息
 ```
-package basic;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.fluent.Executor;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.client.fluent.Response;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class ApiCallProcess {
-    private final static String HOST_URL = "https://www.apiopen.top/addStatistics";
-
-    /**
-     * 模拟请求客户端
+/**
+     * 基于post接口 http://httpbin.org/post
+     * request参数：
+     * {
+     * "username": "vip",
+     * "password": "secret"
+     * }
+     * 返回结果：
+     * {
+     * "args": {},
+     * "data": "{\"username\":\"vip\",\"password\":\"secret\"}",
+     * "files": {},
+     * "form": {},
+     * "headers": {
+     * "Accept": "application/json",
+     * "Connection": "close",
+     * "Content-Length": "38",
+     * "Content-Type": "application/json",
+     * "Encoding": "UTF-8",
+     * "Host": "httpbin.org"
+     * },
+     * "json": {
+     * "password": "secret",
+     * "username": "vip"
+     * },
+     * "origin": "222.73.202.154",
+     * "url": "http://httpbin.org/post"
+     * }
      */
-    private static final HttpClient client = HttpClients.createDefault();
+```
 
-    /**
-     * 管理网络请求http://hc.apache.org/httpcomponents-client-ga/fluent-hc/apidocs/org/apache/http/client/fluent/Executor.html
-     * <p>
-     * An Executor for fluent requests.
-     * <p>
-     * A PoolingHttpClientConnectionManager with maximum 100 connections per route and a total maximum of 200 connections is used internally.
-     */
-    private static final Executor executor = Executor.newInstance(client);
-
-    public static void main(String[] args) {
-        Request request = buildBasicRequest(HOST_URL);
-        try {
-            //执行网络请求
-            Response response = executor.execute(request);
-            HttpResponse returnResponse = response.returnResponse();
-            String respJson = EntityUtils.toString(returnResponse.getEntity());
-//            判断返回结果的http status值，可以根据自己的需求来写
-            int statusCode = returnResponse.getStatusLine().getStatusCode();
-            //定义合理的状态值
-            if (statusCode < HttpStatus.SC_OK || statusCode > HttpStatus.SC_MULTIPLE_CHOICES) {
-                throw new RuntimeException("调用api结果返回状态码不对！值为：" + statusCode);
-            }
-            System.out.println("------------调用api返回结果为：" + respJson);
-        } catch (IOException e) {
-            throw new RuntimeException("调用api出现io异常", e);
-        }
-    }
-
-    /**
-     * 创建一个基本请求，参数可随需求变化
-     *
-     * @param url 请求地址
-     * @return 基本请求
-     */
-    private static Request buildBasicRequest(String url) {
-        List<BasicNameValuePair> params = getParams();
-        String paramByString = URLEncodedUtils.format(params, "UTF-8");
-        //建立一个Get的请求，带有默认信息，
-        Request request = Request.Get(url + "?" + paramByString);
-        return request;
-    }
-
-    /**
-     * 获取参数
-     *
-     * @return 参数list, 为了更好的可读性
-     */
-    public static List<BasicNameValuePair> getParams() {
-        ArrayList<BasicNameValuePair> params = new ArrayList<>();
-        //id=27610708&page=1
-        params.add(new BasicNameValuePair("appKey", "00d91e8e0cca2b76f515926a36db68f5"));
-        params.add(new BasicNameValuePair("type", "点击统计"));
-        params.add(new BasicNameValuePair("typeId", "1"));
-        params.add(new BasicNameValuePair("count", "2"));
-        return params;
-    }
-
+1. 建立post的基本请求
+	```
+	 String url = "http://httpbin.org/post";
+        Request postReq = Request.Post(url);
+        PostParam postParam = new PostParam("vip", "secret");
+        //设置bodyString
+        postReq.bodyString(JacksonUtils.bean2JsonNotNull(postParam), 		ContentType.APPLICATION_JSON.withCharset(Charsets.UTF_8));
+        return postReq;
+	```
+	 **设置bodyString** 
+	```
+	 postReq.bodyString(JacksonUtils.bean2JsonNotNull(postParam), 		ContentType.APPLICATION_JSON.withCharset(Charsets.UTF_8));
+	```
+	bodyString的参数根据需求有不同的设值：
+	
+	| post类型|第一个值  |第二个值  |
+	| ------------- |:-------------:| ------------- |
+	| application/x-www-form-urlencoded|username=vip&password=secret  | ContentType.APPLICATION_FORM_URLENCODED.withCharset(Charsets.UTF_8)| |
+	| application/json|{"username":"vip","password":"secret"}  | ContentType.APPLICATION_JSON.withCharset(Charsets.UTF_8)|
+      
+2. 执行上面的第三步
+当post类型为application/json时运行结果如下：
+```
+------------调用api返回结果为：{
+  "args": {}, 
+  "data": "{\"username\":\"vip\",\"password\":\"secret\"}", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept-Encoding": "gzip,deflate", 
+    "Connection": "close", 
+    "Content-Length": "38", 
+    "Content-Type": "application/json; charset=UTF-8", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Apache-HttpClient/4.5.5 (Java/1.8.0_101)"
+  }, 
+  "json": {
+    "password": "secret", 
+    "username": "vip"
+  }, 
+  "origin": "222.73.202.154", 
+  "url": "http://httpbin.org/post"
 }
 ```
+当post类型是 application/x-www-form-urlencoded，运行结果为：
+```
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "password": "secret", 
+    "username": "vip"
+  }, 
+  "headers": {
+    "Accept-Encoding": "gzip,deflate", 
+    "Connection": "close", 
+    "Content-Length": "28", 
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Apache-HttpClient/4.5.5 (Java/1.8.0_101)"
+  }, 
+  "json": null, 
+  "origin": "222.73.202.154", 
+  "url": "http://httpbin.org/post"
+}
+```
+
+ 最后代码：
+https://github.com/GitHubsteven/building-block/blob/master/net-connection/src/main/java/basic/ApiCallProcess.java
 

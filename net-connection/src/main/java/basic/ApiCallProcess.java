@@ -1,5 +1,7 @@
 package basic;
 
+import converter.json.jackson.JacksonUtils;
+import org.apache.commons.io.Charsets;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -7,6 +9,7 @@ import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -14,6 +17,8 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ApiCallProcess {
     private final static String HOST_URL = "https://www.apiopen.top/addStatistics";
@@ -33,7 +38,19 @@ public class ApiCallProcess {
     private static final Executor executor = Executor.newInstance(client);
 
     public static void main(String[] args) {
-        Request request = buildBasicRequest(HOST_URL);
+        //执行这个方法，如果是get请求的话
+//        sendRequest(buildGetRequest(HOST_URL));
+        //如果是json post请求的话，那么执行下面这个方法
+//        sendRequest(buildPost());
+        //如果是 表单post请求的话，那么执行下面这个方法
+        sendRequest(buildPostForm());
+    }
+
+    /**
+     * get 请求方法实例
+     */
+    private static void sendRequest(Request request) {
+//        Request request = buildBasicRequest(HOST_URL);
         try {
             //执行网络请求
             Response response = executor.execute(request);
@@ -57,7 +74,7 @@ public class ApiCallProcess {
      * @param url 请求地址
      * @return 基本请求
      */
-    private static Request buildBasicRequest(String url) {
+    private static Request buildGetRequest(String url) {
         List<BasicNameValuePair> params = getParams();
         String paramByString = URLEncodedUtils.format(params, "UTF-8");
         //建立一个Get的请求，带有默认信息，
@@ -79,6 +96,137 @@ public class ApiCallProcess {
         params.add(new BasicNameValuePair("typeId", "1"));
         params.add(new BasicNameValuePair("count", "2"));
         return params;
+    }
+
+
+    /**
+     * 基于post接口 http://httpbin.org/post
+     * request参数：
+     * {
+     * "username": "vip",
+     * "password": "secret"
+     * }
+     * 返回结果：
+     * {
+     * "args": {},
+     * "data": "{\"username\":\"vip\",\"password\":\"secret\"}",
+     * "files": {},
+     * "form": {},
+     * "headers": {
+     * "Accept": "application/json",
+     * "Connection": "close",
+     * "Content-Length": "38",
+     * "Content-Type": "application/json",
+     * "Encoding": "UTF-8",
+     * "Host": "httpbin.org"
+     * },
+     * "json": {
+     * "password": "secret",
+     * "username": "vip"
+     * },
+     * "origin": "222.73.202.154",
+     * "url": "http://httpbin.org/post"
+     * }
+     */
+    public static Request buildPost() {
+        String url = "http://httpbin.org/post";
+        Request postReq = Request.Post(url);
+        PostParam postParam = new PostParam("vip", "secret");
+        //设置bodyString
+        postReq.bodyString(JacksonUtils.bean2JsonNotNull(postParam), ContentType.APPLICATION_JSON.withCharset(Charsets.UTF_8));
+        return postReq;
+    }
+
+    /**
+     * 基于post接口 http://httpbin.org/post  表单类型请求
+     * request参数：
+     * "form": {
+     * "password": "secret",
+     * "username": "vip"
+     * },
+     * 返回结果：
+     * {
+     * "args": {},
+     * "data": "",
+     * "files": {},
+     * "form": {
+     * "password": "secret",
+     * "username": "vip"
+     * },
+     * "headers": {
+     * "Connection": "close",
+     * "Content-Length": "28",
+     * "Content-Type": "application/x-www-form-urlencoded",
+     * "Encoding": "UTF-8",
+     * "Host": "httpbin.org"
+     * },
+     * "json": null,
+     * "origin": "222.73.202.154",
+     * "url": "http://httpbin.org/post"
+     * }
+     */
+    public static Request buildPostForm() {
+        String url = "http://httpbin.org/post";
+        Request postReq = Request.Post(url);
+        PostParam postParam = new PostParam("vip", "secret");
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("username", "vip"));
+        params.add(new BasicNameValuePair("password", "secret"));
+        //设置bodyString
+        postReq.bodyString(joinParam2String(params), ContentType.APPLICATION_FORM_URLENCODED.withCharset(Charsets.UTF_8));
+        return postReq;
+    }
+
+    /**
+     * 表单参数拼接
+     *
+     * @param params 参数
+     * @return
+     */
+    private static String joinParam2String(List<BasicNameValuePair> params) {
+        return params.stream()
+                .map(param -> {
+                    //也许这里要对value进行url值转化，但是这里不考虑
+                    return param.getName() + "=" + param.getValue();
+                }).collect(Collectors.joining("&"));
+    }
+
+    /**
+     * 映射为表单的参数格式
+     *
+     * @param el 参数
+     * @return string类型参数
+     */
+    private static String map2String(Map.Entry<String, Object> el) {
+        String key = el.getKey();
+        Object value = el.getValue();
+        return key + "=" + value;
+    }
+
+    static class PostParam {
+        private String username;
+        private String password;
+
+        public PostParam(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
     }
 
 }
