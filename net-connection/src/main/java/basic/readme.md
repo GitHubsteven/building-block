@@ -34,11 +34,12 @@
 https://www.apiopen.top/addStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5&type=点击统计&typeId=1&count=2
 ```
 分析结果为：
-| 属性 |值  |
-|--|--|
-|  协议|  https|
-|  dns域名（可以说是地址了）|  www.apiopen.top|
-|  path|  addStatistics|
+
+| 属性        | 值           | 
+| ------------- |:-------------:| 
+| 协议     | https | 
+| dns域名（可以说是地址了）| www.apiopen.top      |  
+| path | /addStatistics     |   
 |  请求类型|  get|
 |  请求参数1|  appKey=00d91e8e0cca2b76f515926a36db68f5|
 |  请求参数2|  type=点击统计|
