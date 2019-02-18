@@ -6,7 +6,15 @@ package dp;
  * @author: jet.xie
  * @Date: 2018/8/8
  * @Time: 19:04
- * @Description:
+ * @Description: input: 输入一个硬币值的数组，不一定不相同
+ * 要求：只能求互不相同的的硬币
+ * 求：能收取到最多的硬币值
+ * <p>
+ * 分析下：多余最后一个硬币来说f(x),它会有两种情形
+ * 1. val(x)被取， f(x) = val(x) + f(x -2)
+ * 2. val(x)不会被取，那么f(x) = f(x-1)
+ * <p>
+ * 问题的关键在于如何到达val(x)
  * @version: 1.0.0
  */
 public class CoinMaximization {
