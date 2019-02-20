@@ -13,9 +13,8 @@ package dp;
 public class ChangeMaking {
     public static void main(String[] args) {
         int[] values = {1, 3, 4};
-        for (int i = 6; i < 7; i++) {
-            System.out.println("targets: " + i + " all ways number: " + getWayCnt(values, i));
-        }
+        int coinMin = changeMaking(values, 10);
+        System.out.println(coinMin);
 
     }
 
@@ -34,7 +33,9 @@ public class ChangeMaking {
         int min = Integer.MAX_VALUE;
         for (int i = 1; i < values.length - 1 && values[i] <= amount; i++) {
             int temp = changeMaking(values, amount - values[i]);
-            if (temp < min) min = temp;
+            if (temp < min) {
+                min = temp;
+            }
         }
         return min + 1;
     }
