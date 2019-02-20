@@ -182,4 +182,5 @@ public class PartialSeqFieldKeySorter implements FieldKeySorter {
 ```
 结果正好！
 
-测试类参考：
+完整代码如下[代码](https://github.com/GitHubsteven/building-block/blob/master/net-connection/src/main/java/xstream/generic/custom/characteristic/XmlSequenceCase.java)
+测试类参考[测试代码](https://github.com/GitHubsteven/building-block/blob/master/net-connection/src/test/java/xstream/generic/custom/characteristic/XmlSequenceCaseTest.java)：
