@@ -25,9 +25,6 @@ public class ANode<T> {
         this.value = value;
     }
 
-    public ANode() {
-    }
-
     public T getValue() {
         return value;
     }
@@ -53,5 +50,12 @@ public class ANode<T> {
     public ANode setRightChild(ANode<T> rightChild) {
         this.rightChild = rightChild;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        T leftValue = leftChild == null ? null : leftChild.getValue();
+        T rightValue = rightChild == null ? null : rightChild.getValue();
+        return String.format("current node val: %s, left child: %s, right child: %s", this.value, leftValue, rightValue);
     }
 }
