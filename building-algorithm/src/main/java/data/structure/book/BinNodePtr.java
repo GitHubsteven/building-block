@@ -1,4 +1,4 @@
-package data.structure;
+package data.structure.book;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,15 +11,15 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class BinNodePtr implements BinNode {
-    private Object element;
+public class BinNodePtr<T> implements BinNode<T> {
+    private T element;
     private BinNodePtr left;
     private BinNodePtr right;
 
     public BinNodePtr() {
     }
 
-    public BinNodePtr(Object element, BinNodePtr left, BinNodePtr right) {
+    public BinNodePtr(T element, BinNodePtr left, BinNodePtr right) {
         this.element = element;
         this.left = left;
         this.right = right;

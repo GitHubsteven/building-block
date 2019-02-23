@@ -1,4 +1,4 @@
-package data.structure;
+package data.structure.book;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
