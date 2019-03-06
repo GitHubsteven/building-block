@@ -27,20 +27,20 @@ public class ThreadedBiNode<T extends Comparable<T>> {
     /**
      * true 表示left_child 是前驱，false 表示是儿子
      */
-    private boolean is_thread_left;
+    private boolean leftIsThread;
     /**
      * true 表示前驱，false表示是儿子
      */
-    private boolean is_thread_right;
+    private boolean rightIsThread;
 
     public ThreadedBiNode(T val) {
         this.element = val;
-        is_thread_left = false;
-        is_thread_right = false;
+        leftIsThread = false;
+        rightIsThread = false;
     }
 
     public ThreadedBiNode() {
-        is_thread_left = false;
-        is_thread_right = false;
+        leftIsThread = false;
+        rightIsThread = false;
     }
 }

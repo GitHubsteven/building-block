@@ -73,9 +73,52 @@ public class AssignTree<T extends Comparable<T>> {
     public void preOrderThreaded(ThreadedBiNode<T> root, ThreadedBiNode<T> preNode) {
         if (root == null) return;
         if (root.getLeft() == null) {
-            //如果左孩子为空的话，设为
+            //如果左孩子为空的话，设为前驱
+            root.setLeft(preNode);
+            root.setLeftIsThread(true);
         }
+        //给preNode 设置后驱节点
+        if (preNode != null && preNode.getRight().isRightIsThread()) {
+            preNode.setRight(root);
+        }
+        //如果右孩子为空呢？好像也做不了什么
+        //把当前root设置为下一个的前节点
+        preNode = root;
+        preOrderThreaded(root.getLeft(), preNode);
+        preOrderThreaded(root.getRight(), preNode);
+    }
 
+    /**
+     * 中序遍历
+     *
+     * @param root    当前根节点
+     * @param preNode 前节点
+     */
+    public void midOrderThreaded(ThreadedBiNode<T> root, ThreadedBiNode<T> preNode) {
+        if (root == null) return;
+        midOrderThreaded(root.getLeft(), preNode);
+        if (root.getLeft() == null) {
+            //如果左孩子为空的话，设为前驱
+            root.setLeft(preNode);
+            root.setLeftIsThread(true);
+        }
+        //给preNode 设置后驱节点
+        if (preNode != null && preNode.getRight().isRightIsThread()) {
+            preNode.setRight(root);
+        }
+        //如果右孩子为空呢？好像也做不了什么
+        //把当前root设置为下一个的前节点
+        preNode = root;
+        midOrderThreaded(root.getRight(), preNode);
+    }
+
+
+    /**
+     * 前序遍历
+     *
+     * @param root 根节点
+     */
+    public void preOrderByThread(ThreadedBiNode<T> root) {
 
     }
 
