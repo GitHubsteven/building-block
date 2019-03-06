@@ -6,5 +6,5 @@ package data.structure.book;
  * @Description:
  * @Date: Created at 16:22 2019/2/22.
  */
-public interface BiNode<T> {
+public interface BiNode<T extends Comparable<T>> {
 }

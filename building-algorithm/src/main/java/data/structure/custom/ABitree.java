@@ -32,6 +32,10 @@ public class ABitree<T extends Comparable<T>> {
         this.root = new ANode<>(rootVal);
     }
 
+    public ABitree(T[] values) {
+        fromArray(values);
+    }
+
     /**
      * 增加节点
      *
@@ -108,8 +112,8 @@ public class ABitree<T extends Comparable<T>> {
      */
     public void postOrder(ANode<T> root, Consumer<ANode<T>> visit) {
         if (root == null) return;
-        midOrder(root.getLeftChild(), visit);
-        midOrder(root.getRightChild(), visit);
+        postOrder(root.getLeftChild(), visit);
+        postOrder(root.getRightChild(), visit);
         visit.accept(root);
     }
 
@@ -148,18 +152,42 @@ public class ABitree<T extends Comparable<T>> {
         }
     }
 
-    public static void main(String[] args) {
-        Integer[] values = {6, 9, 4, 2, 8, 10, 5, 7, 0};
-        ABitree<Integer> bitree = new ABitree<>(values[0]);
+    public void fromArray(T[] values) {
+        if (values == null || values.length == 0) return;
+        root = new ANode<>(values[0]);
         for (int i = 1; i < values.length; i++) {
-            bitree.addNode(values[i]);
+            this.addNode(values[i]);
         }
+    }
+
+
+    public static void main(String[] args) {
+        Integer[] values = {6, 9, 4, 2, 8, 10, 5, 0, 7};
 //        bitree.layerTraserval();
         List<ANode<Integer>> nodes = new ArrayList<>();
+        ABitree<Integer> bitree = new ABitree<>(values);
         bitree.preOrder(bitree.getRoot(), nodes::add);
+        System.out.println("preOrder:----------------------");
         for (ANode<Integer> node : nodes) {
             System.out.print(String.format("%s ", node.getValue()));
         }
+        //中序遍历
+        nodes.clear();
+        bitree.midOrder(bitree.getRoot(), nodes::add);
+        System.out.println("\nmidOrder:----------------------");
+        for (ANode<Integer> node : nodes) {
+            System.out.print(String.format("%s ", node.getValue()));
+        }
+        //后序遍历
+        nodes.clear();
+        bitree.postOrder(bitree.getRoot(), nodes::add);
+        System.out.println("\npostOrder:----------------------");
+        for (ANode<Integer> node : nodes) {
+            System.out.print(String.format("%s ", node.getValue()));
+        }
+        System.out.println();
+        nodes.clear();
+        bitree.layerTraserval();
     }
 
 }

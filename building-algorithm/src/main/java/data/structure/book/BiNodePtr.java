@@ -1,5 +1,6 @@
 package data.structure.book;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.CompareGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class BiNodePtr<T> implements BiNode<T> {
+public class BiNodePtr<T extends Comparable<T>> implements BiNode<T> {
     private T element;
     private BiNodePtr left;
     private BiNodePtr right;

@@ -28,7 +28,6 @@ public class Bitree01 {
         int[] abiTree = new int[MAX_SIZE];
 
         public void create(int data) {
-            int i;
             int level;  //树的层数
 
             level = 1; //从层1开始建立
