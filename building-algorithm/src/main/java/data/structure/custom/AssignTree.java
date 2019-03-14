@@ -1,5 +1,7 @@
 package data.structure.custom;
 
+import bean.ThreadedBiNode;
+
 import java.util.function.Consumer;
 
 /**
@@ -138,7 +140,7 @@ public class AssignTree<T extends Comparable<T>> {
         System.out.println("后序遍历-----------");
         BiTreeOrderHelper.postOrder(assignTree.root, consumer);
         System.out.println("层次遍历-----------");
-        BiTreeOrderHelper.layerTraserval(assignTree.root, consumer);
+        BiTreeOrderHelper.layerTraverse(assignTree.root, consumer);
 
     }
 

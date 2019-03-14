@@ -163,7 +163,7 @@ public class ABitree<T extends Comparable<T>> {
 
     public static void main(String[] args) {
         Integer[] values = {6, 9, 4, 2, 8, 10, 5, 0, 7};
-//        bitree.layerTraserval();
+//        bitree.layerTraverse();
         List<ANode<Integer>> nodes = new ArrayList<>();
         ABitree<Integer> bitree = new ABitree<>(values);
         bitree.preOrder(bitree.getRoot(), nodes::add);

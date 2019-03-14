@@ -7,13 +7,13 @@ package data.structure.online.thread;
  * @Date: Created at 20:25 2019/3/6.
  */
 public class Node {
-    private int data;
+    private Integer data;
     private Node left;
     private boolean leftIsThread;        // 左孩子是否为线索
     private Node right;
     private boolean rightIsThread;       // 右孩子是否为线索
 
-    public Node(int data) {
+    public Node(Integer data) {
         this.data = data;
         this.left = null;
         this.leftIsThread = false;
@@ -21,11 +21,11 @@ public class Node {
         this.rightIsThread = false;
     }
 
-    public int getData() {
+    public Integer getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(Integer data) {
         this.data = data;
     }
 

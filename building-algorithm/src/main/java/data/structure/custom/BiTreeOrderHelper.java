@@ -1,6 +1,6 @@
 package data.structure.custom;
 
-import algorithm.ANode;
+import bean.ThreadedBiNode;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class BiTreeOrderHelper {
     /**
      * 层次遍历
      */
-    public static <T extends Comparable<T>> void layerTraserval(ThreadedBiNode<T> root, Consumer<ThreadedBiNode<T>> visit) {
+    public static <T extends Comparable<T>> void layerTraverse(ThreadedBiNode<T> root, Consumer<ThreadedBiNode<T>> visit) {
         List<ThreadedBiNode<T>> curLayerNodes = new ArrayList<>(0);
         curLayerNodes.add(root);
         int layer = 1;

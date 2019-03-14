@@ -1,5 +1,6 @@
 package data.structure.custom;
 
+import bean.ThreadedBiNode;
 import lombok.Getter;
 import lombok.Setter;
 

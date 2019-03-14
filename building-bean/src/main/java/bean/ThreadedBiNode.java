@@ -1,4 +1,4 @@
-package data.structure.custom;
+package bean;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,5 +42,14 @@ public class ThreadedBiNode<T extends Comparable<T>> {
     public ThreadedBiNode() {
         leftIsThread = false;
         rightIsThread = false;
+    }
+
+    public String custom2String() {
+        return String.format("Node:[%s], left:[%s],right[%s]", element == null ? "null" : element.toString(),
+                left == null ? "null" : left.getElement(), right == null ? "null" : right.getElement());
+    }
+
+    public boolean isLeaf() {
+        return left == null && right == null;
     }
 }
