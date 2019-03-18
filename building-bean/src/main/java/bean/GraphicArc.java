@@ -27,4 +27,15 @@ public class GraphicArc<T extends Comparable<T>> {
      * 权值
      */
     private BigDecimal weight;
+
+    public GraphicArc(GraphicVertex<T> from, GraphicVertex<T> to) {
+        this.from = from;
+        this.to = to;
+    }
+
+    public GraphicArc(GraphicVertex<T> from, GraphicVertex<T> to, BigDecimal weight) {
+        this.from = from;
+        this.to = to;
+        this.weight = weight;
+    }
 }

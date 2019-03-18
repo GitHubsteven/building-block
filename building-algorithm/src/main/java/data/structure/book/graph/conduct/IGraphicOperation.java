@@ -62,11 +62,11 @@ public interface IGraphicOperation<T extends Comparable<T>> {
     /**
      * 插入弧
      *
-     * @param arc 弧
+     * @param arc   弧
+     * @param isDel 是否删除
      * @return 成功返回true， 是否返回false
      */
     boolean insertArc(GraphicArc<T> arc);
-
 
     /**
      * 获取顶点的相邻的顶点
@@ -105,7 +105,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param arc 弧
      * @return 是否删除成功
      */
-    boolean deleteVex(GraphicArc<T> arc);
+    boolean deleteArc(GraphicArc<T> arc);
 
     /**
      * 深度优先遍历

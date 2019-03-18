@@ -63,7 +63,11 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
     public Matrix(List<GraphicVertex<T>> vertices, List<GraphicArc<T>> arcs,
                   boolean isDirected, boolean isWithWeight) {
         this.isDirected = isDirected;
+        if (isWithWeight && arcs.stream().anyMatch(it -> it.getWeight() == null)) {
+            throw new IllegalArgumentException("isWithWeight为true的时候请输入权值");
+        }
         this.isWithWeight = isWithWeight;
+        this.vertices = vertices;
         createGraph(vertices, arcs, isDirected, isWithWeight);
     }
 
@@ -157,8 +161,16 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
         int newSize = vertices.size();
         int[][] newMatrix = new int[newSize][newSize];
         int originalSize = this.matrix.length;
-        for (int rowIdx = 0; rowIdx < originalSize; rowIdx++) {
-            System.arraycopy(this.matrix[rowIdx], 0, newMatrix[rowIdx], 0, originalSize);
+        int disConnect = getDisConnect().intValue();
+        for (int rowIdx = 0; rowIdx < newSize; rowIdx++) {
+            if (rowIdx < originalSize) {
+                System.arraycopy(this.matrix[rowIdx], 0, newMatrix[rowIdx], 0, originalSize);
+                newMatrix[rowIdx][newSize - 1] = disConnect;
+            } else {
+                for (int i = 0; i < newMatrix.length; i++) {
+                    newMatrix[rowIdx][i] = disConnect;
+                }
+            }
         }
         this.matrix = newMatrix;
         return true;
@@ -173,19 +185,19 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
     @Override
     public boolean deleteVex(GraphicVertex<T> vertex) {
         int verIdx = vertices.indexOf(vertex);
-        this.vertices.remove(vertex);
         //重构矩阵
-        int size = this.vertices.size();
+        int size = this.vertices.size() - 1;
         int[][] newMatrix = new int[size][size];
-        for (int rowIdx = 0; rowIdx < matrix.length; rowIdx++) {
+        for (int rowIdx = 0, newRowIdx = 0; rowIdx < matrix.length; rowIdx++) {
             //如果是删除顶点的索引的话，那么跳过不复制
             if (rowIdx == verIdx) continue;
             int[] row = this.matrix[rowIdx];
             for (int colIdx = 0; colIdx < row.length; colIdx++) {
                 if (colIdx == verIdx) continue;
-                if (colIdx < verIdx) newMatrix[rowIdx][colIdx] = row[colIdx];
-                if (colIdx > verIdx) newMatrix[rowIdx][colIdx - 1] = row[colIdx];
+                if (colIdx < verIdx) newMatrix[newRowIdx][colIdx] = row[colIdx];
+                if (colIdx > verIdx) newMatrix[newRowIdx][colIdx - 1] = row[colIdx];
             }
+            newRowIdx++;
         }
         this.matrix = newMatrix;
         //从顶点集合中删除顶点
@@ -200,9 +212,20 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
      */
     @Override
     public boolean insertArc(GraphicArc<T> arc) {
+        return insertArc(arc, false);
+    }
+
+    /**
+     * 插入弧
+     *
+     * @param arc   弧
+     * @param isDel 是否为删除，删除和插入在矩阵的实现中是相同的
+     * @return 成功返回true， 是否返回false
+     */
+    public boolean insertArc(GraphicArc<T> arc, boolean isDel) {
         int fromIdx = vertices.indexOf(arc.getFrom());
         int toIdx = vertices.indexOf(arc.getTo());
-        int weight = isWithWeight ? arc.getWeight().intValue() : 1;
+        int weight = isWithWeight ? arc.getWeight().intValue() : isDel ? 0 : 1;
         matrix[fromIdx][toIdx] = weight;
         //如果不是有向图，那么对称点也设为weight
         if (!isDirected) matrix[toIdx][fromIdx] = weight;
@@ -215,11 +238,15 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
      * @return 是否删除成功
      */
     @Override
-    public boolean deleteVex(GraphicArc<T> arc) {
+    public boolean deleteArc(GraphicArc<T> arc) {
         //把弧的路径设置为最大值(如果要求带有权重的话）或者0
-        BigDecimal disConnect = isWithWeight ? new BigDecimal(INFINITY) : BigDecimal.ZERO;
+        BigDecimal disConnect = getDisConnect();
         arc.setWeight(disConnect);
-        return insertArc(arc);
+        return insertArc(arc, true);
+    }
+
+    private BigDecimal getDisConnect() {
+        return isWithWeight ? new BigDecimal(INFINITY) : BigDecimal.ZERO;
     }
 
     /**
@@ -295,9 +322,7 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
         int disconnect = isWithWeight ? INFINITY : 0;
         for (int idx = 0; idx < row.length; idx++) {
             if (row[idx] != disconnect) {
-                GraphicArc<T> arc = new GraphicArc<>();
-                arc.setFrom(vertex);
-                arc.setTo(this.vertices.get(idx));
+                GraphicArc<T> arc = new GraphicArc<>(vertex, this.vertices.get(idx));
                 arc.setWeight(new BigDecimal(row[idx]));
                 verArcs.add(arc);
             }
@@ -327,11 +352,61 @@ public class Matrix<T extends Comparable<T>> implements IGraphicOperation<T> {
 
     /**
      * 测试case，V= {v0,v1,v2,v3}
-     * VR = {v0-v1, v0-v2,v0-v3,v1-v0,v1-v2,}
+     * VR = {v0-v1, v0-v2,v0-v3,v1-v0,v1-v2,v2-v0,v2-v1,v2-v3,v3-v2,v3-v0}
+     *
      * @param args main函数的参数
      */
     public static void main(String[] args) {
-        // TODO: 2019/3/18 待测试
+        List<GraphicVertex<String>> vertices = new ArrayList<>();
+        GraphicVertex<String> vertex0 = new GraphicVertex<>("v0");
+        GraphicVertex<String> vertex1 = new GraphicVertex<>("v1");
+        GraphicVertex<String> vertex2 = new GraphicVertex<>("v2");
+        GraphicVertex<String> vertex3 = new GraphicVertex<>("v3");
+
+        GraphicVertex<String> vertex4 = new GraphicVertex<>("v4");
+
+        vertices.add(vertex0);
+        vertices.add(vertex1);
+        vertices.add(vertex2);
+        vertices.add(vertex3);
+
+        //构造弧
+        GraphicArc<String> arc01 = new GraphicArc<>(vertex0, vertex1, new BigDecimal("1"));
+        GraphicArc<String> arc02 = new GraphicArc<>(vertex0, vertex2, new BigDecimal("2"));
+        GraphicArc<String> arc03 = new GraphicArc<>(vertex0, vertex3, new BigDecimal("3"));
+
+        GraphicArc<String> arc10 = new GraphicArc<>(vertex1, vertex0, new BigDecimal("1"));
+        GraphicArc<String> arc12 = new GraphicArc<>(vertex1, vertex2, new BigDecimal("3"));
+
+        GraphicArc<String> arc20 = new GraphicArc<>(vertex2, vertex0, new BigDecimal("2"));
+        GraphicArc<String> arc21 = new GraphicArc<>(vertex2, vertex1, new BigDecimal("3"));
+        GraphicArc<String> arc23 = new GraphicArc<>(vertex2, vertex3, new BigDecimal("5"));
+
+        GraphicArc<String> arc30 = new GraphicArc<>(vertex3, vertex0, new BigDecimal("3"));
+        GraphicArc<String> arc32 = new GraphicArc<>(vertex3, vertex2, new BigDecimal("5"));
+
+        GraphicArc<String> arc41 = new GraphicArc<>(vertex4, vertex1, new BigDecimal("5"));
+
+        List<GraphicArc<String>> arcs = new ArrayList<>();
+        arcs.add(arc01);
+        arcs.add(arc02);
+        arcs.add(arc03);
+
+        arcs.add(arc10);
+        arcs.add(arc12);
+
+        arcs.add(arc20);
+        arcs.add(arc21);
+        arcs.add(arc23);
+
+        arcs.add(arc30);
+        arcs.add(arc32);
+
+        Matrix<String> matrix = new Matrix<>(vertices, arcs, true, true);
+        matrix.insertVex(vertex4);
+        matrix.insertArc(arc41);
+        matrix.deleteVex(vertex0);
+        matrix.descript();
     }
 
 }

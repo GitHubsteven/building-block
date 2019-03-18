@@ -1,5 +1,6 @@
 package bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,8 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@AllArgsConstructor
 public class GraphicVertex<T extends Comparable<T>> {
     private T value;
+
 }
