@@ -20,7 +20,8 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param isDirected   是否为有向图
      * @param isWithWeight 是否带有权值
      */
-    void createGraph(List<GraphicVertex<T>> vertices, List<GraphicArc<T>> arcs, boolean isDirected, boolean isWithWeight);
+    void createGraph(List<GraphicVertex<T>> vertices, List<GraphicArc<T>> arcs,
+                     boolean isDirected, boolean isWithWeight);
 
     /**
      * 销毁树
