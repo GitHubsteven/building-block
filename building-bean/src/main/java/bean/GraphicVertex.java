@@ -12,8 +12,10 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@AllArgsConstructor
 public class GraphicVertex<T extends Comparable<T>> {
     private T value;
 
+    public GraphicVertex(T value) {
+        this.value = value;
+    }
 }

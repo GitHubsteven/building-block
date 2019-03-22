@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Author jet.xie
- * @Description: 定义树的行为
- * @Date: Created at 12:03 2019/3/18.
+ * @Description:
+ * @Date: Created at 16:46 2019/3/22.
  */
-public interface IGraphicOperation<T extends Comparable<T>> {
+public interface IGraphicOperation2<V, A> {
     /**
      * 生成图
      *
@@ -20,7 +20,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param isDirected   是否为有向图
      * @param isWithWeight 是否带有权值
      */
-    void createGraph(List<GraphicVertex<T>> vertices, List<GraphicArc<T>> arcs,
+    void createGraph(List<V> vertices, List<A> arcs,
                      boolean isDirected, boolean isWithWeight);
 
     /**
@@ -34,7 +34,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertex 顶点
      * @return 坐标位置
      */
-    int locateVex(GraphicVertex<T> vertex);
+    int locateVex(V vertex);
 
     /**
      * 获取第一个连接点
@@ -42,7 +42,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertex 顶点
      * @return 第一个连接点
      */
-    GraphicVertex<T> firstAdjVex(GraphicVertex<T> vertex);
+    V firstAdjVex(V vertex);
 
     /**
      * 增加一个新的节点
@@ -50,7 +50,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertex 节点信息
      * @return 成功返回true， 是否返回false
      */
-    boolean insertVex(GraphicVertex<T> vertex);
+    boolean insertVex(V vertex);
 
     /**
      * 删除节点
@@ -58,7 +58,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertex 节点
      * @return 成功返回true， 是否返回false
      */
-    boolean deleteVex(GraphicVertex<T> vertex);
+    boolean deleteVex(V vertex);
 
     /**
      * 插入弧
@@ -66,7 +66,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param arc 弧
      * @return 成功返回true， 是否返回false
      */
-    boolean insertArc(GraphicArc<T> arc);
+    boolean insertArc(A arc);
 
     /**
      * 获取顶点的相邻的顶点
@@ -74,7 +74,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertex 顶点
      * @return 连接点集合
      */
-    List<GraphicVertex<T>> listAdjVerByIdx(GraphicVertex<T> vertex);
+    List<V> listAdjVerByIdx(V vertex);
 
 
     /**
@@ -83,7 +83,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertexIdx 顶点的索引
      * @return 连接点集合
      */
-    List<GraphicVertex<T>> listAdjVerByIdx(int vertexIdx);
+    List<V> listAdjVerByIdx(int vertexIdx);
 
     /**
      * 获取顶点的弧
@@ -91,7 +91,7 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertex 顶点
      * @return 顶点弧的集合
      */
-    List<GraphicArc<T>> listVerArcs(GraphicVertex<T> vertex);
+    List<A> listVerArcs(V vertex);
 
     /**
      * 通过顶点的索引获取顶点的弧
@@ -99,26 +99,25 @@ public interface IGraphicOperation<T extends Comparable<T>> {
      * @param vertexIdx 顶点的索引
      * @return 顶点弧的集合
      */
-    List<GraphicArc<T>> listVerArcs(int vertexIdx);
+    List<A> listVerArcs(int vertexIdx);
 
     /**
      * @param arc 弧
      * @return 是否删除成功
      */
-    boolean deleteArc(GraphicArc<T> arc);
+    boolean deleteArc(A arc);
 
     /**
      * 深度优先遍历
      *
      * @return 遍历的节点
      */
-    List<GraphicVertex<T>> DFSTraverse();
+    List<V> DFSTraverse();
 
     /**
      * 广度优先遍历
      *
      * @return 遍历的节点
      */
-    List<GraphicVertex<T>> HFSTraverse();
-
+    List<V> HFSTraverse();
 }

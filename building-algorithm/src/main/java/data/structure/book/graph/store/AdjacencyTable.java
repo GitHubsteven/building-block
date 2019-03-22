@@ -1,28 +1,56 @@
 package data.structure.book.graph.store;
 
-import bean.GraphicArc;
-import bean.GraphicVertex;
-import data.structure.book.graph.conduct.IGraphicOperation;
+import algorithm.AdjArc;
+import algorithm.AdjVertex;
+import data.structure.book.graph.conduct.IGraphicOperation2;
 
 import java.util.List;
 
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Author jet.xie
- * @Description:
+ * @Description: 邻接表描述或存储图
  * @Date: Created at 16:20 2019/3/22.
  */
-public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperation<T> {
+public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperation2<AdjVertex<T>, AdjArc<T>> {
+    /**
+     * 顶点集合
+     */
+    private List<AdjVertex<T>> vertices;
+
+    /**
+     * 是否有向图
+     */
+    private boolean isDirected;
+
+    /**
+     * 是否为带权图
+     */
+    private boolean isWithWeight;
+
     /**
      * 生成图
      *
-     * @param graphicVertices 顶点
-     * @param graphicArcs     弧
-     * @param isDirected      是否为有向图
-     * @param isWithWeight    是否带有权值
+     * @param vertices     顶点
+     * @param arcs         弧
+     * @param isDirected   是否为有向图
+     * @param isWithWeight 是否带有权值
      */
     @Override
-    public void createGraph(List<GraphicVertex<T>> graphicVertices, List<GraphicArc<T>> graphicArcs, boolean isDirected, boolean isWithWeight) {
+    public void createGraph(List<AdjVertex<T>> vertices, List<AdjArc<T>> arcs, boolean isDirected, boolean isWithWeight) {
+        //在描述图的过程就是在不停的补充顶点的信息
+        this.vertices = vertices;
+        this.isWithWeight = isWithWeight;
+        this.isDirected = isDirected;
+
+        //遍历弧，初始化邻接表
+        for (AdjArc<T> arc : arcs) {
+            int fromIdx = vertices.indexOf(arc.getFrom());
+            int toIdx = vertices.indexOf(arc.getTo());
+            
+
+        }
+
 
     }
 
@@ -41,7 +69,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 坐标位置
      */
     @Override
-    public int locateVex(GraphicVertex<T> vertex) {
+    public int locateVex(AdjVertex<T> vertex) {
         return 0;
     }
 
@@ -52,7 +80,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 第一个连接点
      */
     @Override
-    public GraphicVertex<T> firstAdjVex(GraphicVertex<T> vertex) {
+    public AdjVertex<T> firstAdjVex(AdjVertex<T> vertex) {
         return null;
     }
 
@@ -63,7 +91,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 成功返回true， 是否返回false
      */
     @Override
-    public boolean insertVex(GraphicVertex<T> vertex) {
+    public boolean insertVex(AdjVertex<T> vertex) {
         return false;
     }
 
@@ -74,7 +102,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 成功返回true， 是否返回false
      */
     @Override
-    public boolean deleteVex(GraphicVertex<T> vertex) {
+    public boolean deleteVex(AdjVertex<T> vertex) {
         return false;
     }
 
@@ -85,7 +113,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 成功返回true， 是否返回false
      */
     @Override
-    public boolean insertArc(GraphicArc<T> arc) {
+    public boolean insertArc(AdjArc<T> arc) {
         return false;
     }
 
@@ -96,7 +124,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 连接点集合
      */
     @Override
-    public List<GraphicVertex<T>> listAdjVerByIdx(GraphicVertex<T> vertex) {
+    public List<AdjVertex<T>> listAdjVerByIdx(AdjVertex<T> vertex) {
         return null;
     }
 
@@ -107,7 +135,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 连接点集合
      */
     @Override
-    public List<GraphicVertex<T>> listAdjVerByIdx(int vertexIdx) {
+    public List<AdjVertex<T>> listAdjVerByIdx(int vertexIdx) {
         return null;
     }
 
@@ -118,7 +146,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 顶点弧的集合
      */
     @Override
-    public List<GraphicArc<T>> listVerArcs(GraphicVertex<T> vertex) {
+    public List<AdjArc<T>> listVerArcs(AdjVertex<T> vertex) {
         return null;
     }
 
@@ -129,7 +157,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 顶点弧的集合
      */
     @Override
-    public List<GraphicArc<T>> listVerArcs(int vertexIdx) {
+    public List<AdjArc<T>> listVerArcs(int vertexIdx) {
         return null;
     }
 
@@ -138,7 +166,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 是否删除成功
      */
     @Override
-    public boolean deleteArc(GraphicArc<T> arc) {
+    public boolean deleteArc(AdjArc<T> arc) {
         return false;
     }
 
@@ -148,7 +176,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 遍历的节点
      */
     @Override
-    public List<GraphicVertex<T>> DFSTraverse() {
+    public List<AdjVertex<T>> DFSTraverse() {
         return null;
     }
 
@@ -158,7 +186,7 @@ public class AdajacencyTable<T extends Comparable<T>> implements IGraphicOperati
      * @return 遍历的节点
      */
     @Override
-    public List<GraphicVertex<T>> HFSTraverse() {
+    public List<AdjVertex<T>> HFSTraverse() {
         return null;
     }
 }
