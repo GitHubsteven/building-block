@@ -1,6 +1,5 @@
 package algorithm;
 
-import bean.GraphicVertex;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,13 @@ import java.math.BigDecimal;
 @Setter
 @Getter
 public class AdjLinkNode<T extends Comparable<T>> {
+    /**
+     * 当前点的索引
+     */
     private int verIdx;
+    /**
+     * 下一个连接点的指针
+     */
     private AdjLinkNode<T> next;
     /**
      * 权重，如果存在的话

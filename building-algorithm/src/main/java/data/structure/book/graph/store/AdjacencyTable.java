@@ -1,15 +1,18 @@
 package data.structure.book.graph.store;
 
 import algorithm.AdjArc;
+import algorithm.AdjLinkNode;
 import algorithm.AdjVertex;
 import data.structure.book.graph.conduct.IGraphicOperation2;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Author jet.xie
- * @Description: 邻接表描述或存储图
+ * @Description: 邻接表描述或存储图，其实我不明白为什么要用索引来描述，直接描述不行吗？索引一旦改变，这个邻接表几乎都要被改变
+ * 这是非常繁琐和不合理的，这只是一个疑问而已
  * @Date: Created at 16:20 2019/3/22.
  */
 public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperation2<AdjVertex<T>, AdjArc<T>> {
@@ -45,21 +48,82 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
 
         //遍历弧，初始化邻接表
         for (AdjArc<T> arc : arcs) {
-            int fromIdx = vertices.indexOf(arc.getFrom());
-            int toIdx = vertices.indexOf(arc.getTo());
-            
-
+            int fromIdx = indexByValue(this.vertices, arc.getFrom());
+            int toIdx = indexByValue(this.vertices, arc.getTo());
+            //为from创建一个链接对象
+            addAdjVerNode(arc.getWeight(), fromIdx, toIdx);
+            //如果不是有向图的话，那么同时在目的顶点的怕旁边及诶单链表也加入连接点
+            if (!isDirected) addAdjVerNode(arc.getWeight(), toIdx, fromIdx);
         }
-
-
     }
+
+    /**
+     * 往顶点中插入连接点
+     *
+     * @param weight  权重
+     * @param fromIdx 起点索引
+     * @param toIdx   终点索引
+     */
+    private void addAdjVerNode(BigDecimal weight, int fromIdx, int toIdx) {
+        AdjVertex<T> vertex = this.vertices.get(fromIdx);
+        AdjLinkNode<T> firstEdge = vertex.getFirstEdge();
+        AdjLinkNode<T> toAdj = new AdjLinkNode<>();
+        toAdj.setVerIdx(toIdx);
+        if (this.isWithWeight) toAdj.setWeight(weight);
+        if (firstEdge == null) {
+            vertex.setFirstEdge(toAdj);
+        } else {
+            insert2Link(firstEdge, toAdj);
+        }
+    }
+
+    /**
+     * 往链表插入对象
+     *
+     * @param head       头结点
+     * @param insertNode 待插入的节点
+     * @return 结果，true表示成功，false表示失败
+     */
+    private boolean insert2Link(AdjLinkNode<T> head, AdjLinkNode<T> insertNode) {
+        if (head == null) {
+            return true;
+        }
+        //找到最后一个节点
+        AdjLinkNode<T> last = head;
+        while (last.getNext() != null) {
+            last = last.getNext();
+        }
+        last.setNext(insertNode);
+        return true;
+    }
+
+
+    /**
+     * 不重写hashcode+ equals，因为适用范围小
+     *
+     * @param vertices 链接表的顶点
+     * @param vertex   待检测的对象
+     * @return 在顶点集合的索引
+     */
+    int indexByValue(List<AdjVertex<T>> vertices, AdjVertex<T> vertex) {
+        for (int i = 0; i < vertices.size(); i++) {
+            AdjVertex<T> item = vertices.get(i);
+            if (vertex.getValue().compareTo(item.getValue()) == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
     /**
      * 销毁树
      */
     @Override
     public void destroyGraph() {
-
+        this.vertices = null;
+        this.isWithWeight = false;
+        this.isDirected = false;
     }
 
     /**
@@ -70,7 +134,7 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
      */
     @Override
     public int locateVex(AdjVertex<T> vertex) {
-        return 0;
+        return indexByValue(this.vertices, vertex);
     }
 
     /**
@@ -81,7 +145,9 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
      */
     @Override
     public AdjVertex<T> firstAdjVex(AdjVertex<T> vertex) {
-        return null;
+        AdjLinkNode<T> firstEdge = vertex.getFirstEdge();
+        if (firstEdge == null) return null;
+        return this.vertices.get(firstEdge.getVerIdx());
     }
 
     /**
@@ -92,7 +158,7 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
      */
     @Override
     public boolean insertVex(AdjVertex<T> vertex) {
-        return false;
+        return this.vertices.add(vertex);
     }
 
     /**
@@ -103,8 +169,41 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
      */
     @Override
     public boolean deleteVex(AdjVertex<T> vertex) {
+        /*
+        1. 删除和vertex相关的idx
+        2. 修改链接点的索引
+         */
+        int index = locateVex(vertex);
+        for (int idx = 0; idx < this.vertices.size(); idx++) {
+            AdjLinkNode<T> firstEdge = vertex.getFirstEdge();
+
+        }
+
+
         return false;
     }
+
+    /**
+     * 删除链表节点
+     *
+     * @param head    链表头
+     * @param delNode 待删除的链表
+     */
+    private void deleteNode(AdjLinkNode<T> head, AdjLinkNode<T> delNode) {
+        AdjLinkNode<T> tmp = head;
+        //如果是头结点的话，那么久删除头结点，让头结点的next成为头结点
+        if (tmp.getVerIdx() == delNode.getVerIdx()) {
+            head = head.getNext();
+
+        }
+        AdjLinkNode<T> pre = head;
+        while (tmp != null) {
+            if (tmp.getVerIdx() == delNode.getVerIdx()) {
+
+            }
+        }
+    }
+
 
     /**
      * 插入弧
