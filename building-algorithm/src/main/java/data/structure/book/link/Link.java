@@ -3,6 +3,7 @@ package data.structure.book.link;
 import algorithm.link.LinkNode;
 import data.structure.book.link.conduct.ILinkOperation;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author: asaland
@@ -12,6 +13,7 @@ import lombok.Getter;
  * @description: 链表操作
  **/
 @Getter
+@Setter
 public class Link<T extends Comparable<T>> implements ILinkOperation<T> {
     private LinkNode<T> head;
 
@@ -68,17 +70,20 @@ public class Link<T extends Comparable<T>> implements ILinkOperation<T> {
         }
     }
 
+
+
     public static void main(String[] args) {
         Link<Integer> link = new Link<>();
-        link.addNode(new LinkNode<>(1));
+        LinkNode<Integer> node_1 = new LinkNode<>(1);
+        link.addNode(node_1);
         link.addNode(new LinkNode<>(2));
         LinkNode<Integer> five = new LinkNode<>(5);
         link.addNode(five);
         link.addNode(new LinkNode<>(7));
         link.addNode(new LinkNode<>(3));
         link.traversal(link.getHead());
-        link.deleteNode(five);
-        System.out.println("\n--------------------delete node 5");
+        System.out.println("\n--------------------delete node 1");
+        link.deleteNode(node_1);
         link.traversal(link.getHead());
     }
 }

@@ -52,7 +52,7 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
             int toIdx = indexByValue(this.vertices, arc.getTo());
             //为from创建一个链接对象
             addAdjVerNode(arc.getWeight(), fromIdx, toIdx);
-            //如果不是有向图的话，那么同时在目的顶点的怕旁边及诶单链表也加入连接点
+            //如果不是有向图的话，那么同时在目的顶点的旁边及单链表也加入连接点
             if (!isDirected) addAdjVerNode(arc.getWeight(), toIdx, fromIdx);
         }
     }
@@ -176,10 +176,13 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
         int index = locateVex(vertex);
         for (int idx = 0; idx < this.vertices.size(); idx++) {
             AdjLinkNode<T> firstEdge = vertex.getFirstEdge();
-
+            if (firstEdge != null) {
+                //如果相邻链表不为空，那么就做如下处理
+                AdjLinkNode<T> delNode = new AdjLinkNode<T>();
+                delNode.setVerIdx(index);
+                whenDelNode(firstEdge, delNode);
+            }
         }
-
-
         return false;
     }
 
@@ -189,19 +192,31 @@ public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperatio
      * @param head    链表头
      * @param delNode 待删除的链表
      */
-    private void deleteNode(AdjLinkNode<T> head, AdjLinkNode<T> delNode) {
+    private void whenDelNode(AdjLinkNode<T> head, AdjLinkNode<T> delNode) {
+        if (head == null) return;
+        //保存头结点
         AdjLinkNode<T> tmp = head;
-        //如果是头结点的话，那么久删除头结点，让头结点的next成为头结点
-        if (tmp.getVerIdx() == delNode.getVerIdx()) {
-            head = head.getNext();
-
-        }
         AdjLinkNode<T> pre = head;
-        while (tmp != null) {
-            if (tmp.getVerIdx() == delNode.getVerIdx()) {
-
+        int delIdx = delNode.getVerIdx();
+        do {
+            int curVerIdx = tmp.getVerIdx();
+            if (curVerIdx == delIdx) {
+                //判断是否为头结点，如果是的话，那么同时会改变头结点
+                if (head.getVerIdx() == delIdx) {
+                    head = tmp.getNext();
+                    pre = tmp.getNext();
+                } else {
+                    pre.setNext(tmp.getNext());
+                }
+            } else if (curVerIdx > delIdx) {
+                //如果顶点索引大于被删顶点索引的话，那么就-1
+                tmp.setVerIdx(curVerIdx - 1);
+            } else {
+                //如果是小于的话，那么不做处理
+                pre = tmp;
             }
-        }
+            tmp = tmp.getNext();
+        } while (tmp.getNext() != null);
     }
 
 
