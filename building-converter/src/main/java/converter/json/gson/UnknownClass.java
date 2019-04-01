@@ -1,5 +1,9 @@
 package converter.json.gson;
 
+import com.google.gson.Gson;
+import converter.json.fastjson.User;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +15,21 @@ import java.util.List;
  */
 public class UnknownClass {
 
-    public static void main(String[] args) {
-        List<Number> numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(3D);
-        numbers.add(3.3f);
-        for (Number number : numbers) {
-            System.out.println(number.getClass().getSimpleName());
+    public static void main(String[] args) throws IllegalAccessException {
+        Gson gson = new Gson();
+        User user = new User();
+        user.setName("name1");
+        user.setAge(1L);
+        System.out.println(gson.toJson(user));
+
+
+        for (Field field : User.class.getDeclaredFields()) {
+            if (field.getName().equals("name")) {
+                field.setAccessible(true);
+                field.set(user, "hello");
+            }
         }
+
+        System.out.println(user.getName());
     }
 }

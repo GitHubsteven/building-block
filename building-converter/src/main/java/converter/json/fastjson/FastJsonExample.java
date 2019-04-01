@@ -36,7 +36,7 @@ public class FastJsonExample {
     public void _2JsonTest() {
         User user = new User();
         user.setName("校长");
-        user.setAge(3);
+        user.setAge(3L);
         user.setSalary(new BigDecimal("123456789.0123"));
         String jsonString = JSON.toJSONString(user);
         System.out.println(jsonString);
