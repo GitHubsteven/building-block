@@ -1,6 +1,8 @@
 package converter.json.fastjson;
 
-import lombok.Data;
+import bean.Person;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -13,9 +15,8 @@ import java.math.BigDecimal;
  * @Description:
  * @version: 1.0.0
  */
-@Data
-public class User {
-    private String name;
-    private Long age;
+@Setter
+@Getter
+public class User extends Person {
     private BigDecimal salary;
 }

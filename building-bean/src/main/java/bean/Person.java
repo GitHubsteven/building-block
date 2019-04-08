@@ -17,6 +17,8 @@ public class Person {
     private String name;
     private Integer age;
 
+    public Person() {
+    }
 
     public static void main(String[] args) {
         Person person = new Person("name1", 1);

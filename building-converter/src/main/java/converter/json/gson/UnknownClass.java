@@ -19,7 +19,7 @@ public class UnknownClass {
         Gson gson = new Gson();
         User user = new User();
         user.setName("name1");
-        user.setAge(1L);
+        user.setAge(1);
         System.out.println(gson.toJson(user));
 
 
@@ -32,4 +32,5 @@ public class UnknownClass {
 
         System.out.println(user.getName());
     }
+
 }
