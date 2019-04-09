@@ -20,4 +20,9 @@ public class AdjVertex<T extends Comparable<T>> {
      * 第一条边
      */
     private AdjLinkNode<T> firstEdge;
+
+    public AdjVertex(T value) {
+        this.value = value;
+    }
+
 }
