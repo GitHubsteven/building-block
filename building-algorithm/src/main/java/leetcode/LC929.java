@@ -6,6 +6,7 @@ import java.util.Objects;
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Author jet.xie
  * @Description: Unique Email Addresses
+ * https://leetcode.com/problems/unique-email-addresses/
  * @Date: Created at 20:23 2019/4/11.
  */
 public class LC929 {
