@@ -15,6 +15,12 @@ public class LC929 {
         System.out.println(numUniqueEmails(emails));
     }
 
+    /**
+     * 注意数字是否有效，无效的忽略，有效的存储起来
+     *
+     * @param emails
+     * @return
+     */
     public static int numUniqueEmails(String[] emails) {
         char IGNORE_LATTER_LETTER_IN_LOCAL = '+';
         char IGNORE_SELF_LETTER_IN_LOCAL = '.';

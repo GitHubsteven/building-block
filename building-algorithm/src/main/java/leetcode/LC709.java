@@ -12,6 +12,12 @@ public class LC709 {
         System.out.println(toLowerCase(str));
     }
 
+    /**
+     * 大写和小写ASCII的值
+     *
+     * @param str
+     * @return
+     */
     public static String toLowerCase(String str) {
         if (str == null || str.length() == 0) return str;
         StringBuilder sb = new StringBuilder();

@@ -55,6 +55,8 @@ public class LC65 {
      * " --6 " => false
      * "-+3" => false
      * "95a54e53" => false
+     * <p>
+     * 注意底数和指数的. + -什么时候可以存在
      *
      * @param s
      * @return
