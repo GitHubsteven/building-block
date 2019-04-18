@@ -45,6 +45,8 @@ public class ParseUpsDoc {
 
         List<ClzInfo> clzInfos = listClzInfos("com.asa.x.jxls.model");
         System.out.println(clzInfos.size());
+
+        // TODO: 2019/4/18 在生成class的过程中确定类型关系，存在已有的class，
     }
 
     /**

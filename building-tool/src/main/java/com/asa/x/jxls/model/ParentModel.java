@@ -15,6 +15,6 @@ public class ParentModel {
     private String name;
 
     public static void main(String[] args) {
-        System.out.println(ParentModel.class.getSuperclass().getSuperclass() != null);
+        System.out.println(ParentModel.class.getSuperclass().getSuperclass());
     }
 }
