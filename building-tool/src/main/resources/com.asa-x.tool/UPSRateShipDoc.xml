@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--文件上传excel读取配置, 此xml配置方式可以参照文档 http://jxls.sourceforge.net/reference/reader.html  -->
+<workbook>
+    <worksheet name="request">
+        <section startRow="0" endRow="2">
+            <!--<mapping row="0" col="0">clientShipmentBean.column1</mapping>-->
+            <mapping row="1" col="0">request.clzName</mapping>
+        </section>
+        <loop startRow="3" endRow="3" items="request.items" var="item"
+              varType="com.asa.x.jxls.ItemBean">
+            <section startRow="3" endRow="4">
+                <mapping row="3" col="0">item.fieldPath</mapping>
+                <mapping row="4" col="0">item.fieldName</mapping>
+                <mapping row="4" col="3">item.constraint</mapping>
+                <mapping row="4" col="4">item.description</mapping>
+            </section>
+            <loopbreakcondition>
+                <rowcheck offset="0">
+                    <!--这里定义1行的为空值时终止循环-->
+                    <cellcheck offset="0"></cellcheck>
+                </rowcheck>
+            </loopbreakcondition>
+        </loop>
+    </worksheet>
+</workbook>
