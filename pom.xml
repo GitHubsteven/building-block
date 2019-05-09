@@ -21,6 +21,7 @@
         <module>building-converter</module>
         <module>building-optimize</module>
         <module>building-tool</module>
+        <module>building-organization</module>
     </modules>
 
     <properties>

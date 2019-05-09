@@ -84,14 +84,8 @@ public class MD5 {
 
             in.close();
 
-            String result = byteArrayToHex(messagedigest.digest());
-
-            return result;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            return byteArrayToHex(messagedigest.digest());
+        } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }
 
