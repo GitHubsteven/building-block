@@ -1,6 +1,7 @@
 package com.idv.converter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,9 +12,7 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        CommonBox<Long> box = getBox();
-        Long x = box.get();
-        System.out.println(x);
+        System.out.println(String.format("%03d", 50));
     }
 
     private static CommonBox<Long> getBox() {
