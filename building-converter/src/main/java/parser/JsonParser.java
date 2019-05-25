@@ -18,6 +18,7 @@ public class JsonParser {
         for (String sentence : sentences) {
             iParser.parseSentence(sentence);
         }
+        return null;
     }
 
 }

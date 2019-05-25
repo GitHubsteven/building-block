@@ -2,6 +2,9 @@ package com.asa.x.jxls;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 字符串工具类
  *
@@ -38,4 +41,21 @@ public final class StringUtil {
     public static String[] splitString(String str, String separator) {
         return StringUtils.splitByWholeSeparator(str, separator);
     }
+
+
+    public static String reverse(String context) {
+        if (context == null || context.length() == 0) return null;
+        StringBuilder sb = new StringBuilder();
+        int length = context.length();
+        for (int i = length - 1; i >= 0; i--) {
+            sb.append(context.charAt(i));
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reverse("abcd1223"));
+    }
+
+
 }
