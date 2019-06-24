@@ -12,6 +12,7 @@ import com.sun.javafx.iio.ImageStorage;
 import org.apache.commons.io.FileUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageTree;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -26,10 +27,12 @@ public class PDFBox {
         System.out.println(pageCount);
         Date start = new Date();
         try {
-            List pages = doc.getDocumentCatalog().getAllPages();
-            for (int i = 0; i < pages.size(); i++) {
-                PDPage page = (PDPage) pages.get(i);
-                BufferedImage image = page.convertToImage(1, 216);
+            PDPageTree pageTree = doc.getDocumentCatalog().getPages();
+            for (int i = 0; i < pageTree.getCount(); i++) {
+                PDPage page = pageTree.get(i);
+//                BufferedImage image = page.convertToImage(1, 216);
+                // TODO: 2019/5/30 重新修改这个部分代码
+                BufferedImage image = null;
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 ImageIO.write(image, "JPEG", bos);
                 String jpgText = encoder.encode(bos.toByteArray());
