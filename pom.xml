@@ -24,6 +24,7 @@
         <module>building-organization</module>
         <module>feign-for-api</module>
         <module>building-basic</module>
+        <module>building-encryption</module>
     </modules>
 
     <properties>

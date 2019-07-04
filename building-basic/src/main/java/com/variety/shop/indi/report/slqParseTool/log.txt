@@ -1,0 +1,2 @@
+[17-06-01 16:20:33.876] ce.core.dao.wms.WmsBtStoreStockBookDao.selectCount[DEBUG]:181  | ==>  Preparing: select count(*) from wms_bt_store_stock_book_s1 WHERE `store_id` = ? and `channel_id` = ? and `sku` = ? 
+[17-06-01 16:20:33.878] ce.core.dao.wms.WmsBtStoreStockBookDao.selectCount[DEBUG]:181  | ==> Parameters: 1(Integer), 001(String), 001001B07-BLK-6.5(String)
