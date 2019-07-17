@@ -11,20 +11,24 @@ import java.security.NoSuchAlgorithmException;
 public class ExceptionDemo1 {
     public static void main(String[] args) {
         try {
-            doBusiness(true);
+            doBusiness(4);
         } catch (NoSuchAlgorithmException e) {
             System.out.println("------> algorithm exception");
         } catch (RuntimeException e) {
             System.out.println("------> runtime exception");
         } finally {
+            //无论是否抛出异常，都会异常
             System.out.println("--------->finally");
         }
         System.out.println("---------->other");
     }
 
-    static void doBusiness(boolean isUnNormal) throws NoSuchAlgorithmException {
-        if (isUnNormal)
+    static void doBusiness(int isUnNormal) throws NoSuchAlgorithmException {
+        if (isUnNormal == 0)
             throw new RuntimeException("test exception!");
-        throw new NoSuchAlgorithmException("test algori exception!");
+        else if (isUnNormal == 1) {
+            throw new NoSuchAlgorithmException("test algori exception!");
+        }
+
     }
 }
