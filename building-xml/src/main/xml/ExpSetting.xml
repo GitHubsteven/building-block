@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<experiment>
+    <setting enable="true">
+        <type>disruption</type>
+        <indepRun>50</indepRun>
+        <nThreads>100</nThreads>
+        <threadId>50</threadId>
+        <targetComp>CurrencyConverter</targetComp>
+        <baseDir>/home/conup</baseDir>
+        <ipAddress>114.212.191.22</ipAddress>
+        <rqstInterval>100</rqstInterval>
+        <updateInterval>80</updateInterval>
+    </setting>
+
+    <setting enable="false">
+        <type>timeliness</type>
+        <indepRun>50</indepRun>
+        <nThreads>100</nThreads>
+        <threadId>50</threadId>
+        <targetComp>CurrencyConverter</targetComp>
+        <baseDir>/home/conup</baseDir>
+        <ipAddress>114.212.191.22</ipAddress>
+        <rqstInterval>100</rqstInterval>
+        <updateInterval>80</updateInterval>
+    </setting>
+
+    <setting enable="false">
+        <type>overhead</type>
+        <indepRun>50</indepRun>
+        <nThreads>100</nThreads>
+        <threadId>50</threadId>
+        <targetComp>CurrencyConverter</targetComp>
+        <baseDir>/home/conup</baseDir>
+        <ipAddress>114.212.191.22</ipAddress>
+        <rqstInterval>100</rqstInterval>
+        <updateInterval>80</updateInterval>
+    </setting>
+</experiment>

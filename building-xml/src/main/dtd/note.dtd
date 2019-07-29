@@ -1,0 +1,17 @@
+<!ELEMENT note (title+,to,from,heading,body,(name|username),square,contact,payment,author)>
+        <!ELEMENT title (#PCDATA)>
+        <!ELEMENT to (#PCDATA)>
+        <!ELEMENT from (#PCDATA)>
+        <!ELEMENT heading (#PCDATA)>
+        <!ELEMENT body (#PCDATA)>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT username (#PCDATA)>
+        <!ELEMENT square (#PCDATA)>
+        <!ELEMENT contact (#PCDATA)>
+        <!ELEMENT payment (#PCDATA)>
+        <!ELEMENT author (#PCDATA)>
+        <!ATTLIST square width CDATA #REQUIRED>
+        <!ATTLIST contact fax CDATA #IMPLIED>
+        <!ATTLIST payment type (check|cash) "cash">
+        <!ENTITY writer "Donald Duck.">
+        <!ENTITY copyright "Copyright runoob.com">

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE conup [
+        <!ENTITY experiment SYSTEM "ExpSetting.xml">
+        ]>
+<conup>
+    <configuration>
+        <algorithm>CONSISTENCY_ALGORITHM</algorithm>
+        <freenessStrategy>CONCURRENT_VERSION_FOR_FREENESS</freenessStrategy>
+    </configuration>
+
+    &experiment;
+
+</conup>

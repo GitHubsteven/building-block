@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE note SYSTEM "note.dtd">
+
+<note>
+    <title>title</title>
+    <to>Tove</to>
+    <from>Jani</from>
+    <heading>Reminder</heading>
+    <body>Don't forget me this weekend!</body>
+    <name>name</name>
+    <square width="12">2</square>
+    <contact>163-234</contact>
+    <payment type="check"/>
+    <author>author</author>
+</note>
+
