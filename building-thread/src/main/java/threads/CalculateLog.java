@@ -5,7 +5,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class CalculateLog {
                 });
 
                 Map<String, Long> key2NumbesrMap = values.stream()
-                        .collect(Collectors.groupingBy(it -> it.getKey(), Collectors.counting()));
+                        .collect(Collectors.groupingBy(Pair::getKey, Collectors.counting()));
                 key2NumbesrMap.forEach((threadName, outTime) -> {
                     if (outTime != 5) {
                         System.out.println("------" + threadName);
