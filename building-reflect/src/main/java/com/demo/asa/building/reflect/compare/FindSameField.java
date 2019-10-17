@@ -1,4 +1,4 @@
-package compare;
+package com.demo.asa.building.reflect.compare;
 
 import java.lang.reflect.Field;
 import java.util.Set;
