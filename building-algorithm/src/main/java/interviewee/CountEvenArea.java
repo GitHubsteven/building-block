@@ -1,7 +1,5 @@
 package interviewee;
 
-import javafx.util.converter.NumberStringConverter;
-
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2019 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Description:
