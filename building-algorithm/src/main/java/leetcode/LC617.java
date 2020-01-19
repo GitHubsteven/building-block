@@ -1,9 +1,7 @@
 package leetcode;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,15 +9,16 @@ import java.util.Queue;
  * @author: jet.xie
  * @Date: 2018/8/22
  * @Time: 15:28
- * @Description:
+ * @Description: leetCode url:https://leetcode.com/problems/merge-two-binary-trees/
  * @version: 1.0.0
  */
 // TODO: 2019/4/10  to complete
-public class MergeBITree {
+public class LC617 {
     /**
      * Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.
      * <p>
-     * You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.
+     * You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node.
+     * Otherwise, the NOT null node will be used as the node of new tree.
      * <p>
      * Example 1:
      * Input:
@@ -84,7 +83,7 @@ public class MergeBITree {
         root.left = three;
         root.right = two;
         three.left = five;
-        MergeBITree treeTest = new MergeBITree();
+        LC617 treeTest = new LC617();
         treeTest.BFS(root);
     }
 }
