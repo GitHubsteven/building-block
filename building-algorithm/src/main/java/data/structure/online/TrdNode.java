@@ -31,9 +31,7 @@ public class TrdNode {
     public boolean equals(Object obj) {
         if (obj instanceof TrdNode) {
             TrdNode tmp = (TrdNode) obj;
-            if (tmp.getData() == this.data) {
-                return true;
-            }
+            return tmp.getData() == this.data;
         }
         return false;
     }

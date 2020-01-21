@@ -1,8 +1,6 @@
 package data.structure.book.Huffman;
 
 import bean.HFMEnCodeNode;
-import bean.ThreadedBiNode;
-import data.structure.custom.BiTreeOrderHelper;
 
 import java.math.BigDecimal;
 import java.util.*;

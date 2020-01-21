@@ -1,8 +1,5 @@
 package data.structure.book.graph.conduct;
 
-import bean.GraphicArc;
-import bean.GraphicVertex;
-
 import java.util.List;
 
 /**

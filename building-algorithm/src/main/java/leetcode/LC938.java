@@ -1,10 +1,8 @@
 package leetcode;
 
-import leetcode.model.TreeNode;
-
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2019 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
- * @Description:
+ * @Description: https://leetcode.com/problems/range-sum-of-bst/
  * @Author asa.x
  * @Date: Created at 18:40 2020/1/20.
  */
@@ -33,8 +31,29 @@ public class LC938 {
      * The final answer is guaranteed to be less than 2^31.
      */
     public int rangeSumBST(TreeNode root, int L, int R) {
-        return 0;
+        if (root == null)
+            return 0;
+        if (root.val < L)
+            return rangeSumBST(root.right, L, R);
+        if (root.val > R)
+            return rangeSumBST(root.left, L, R);
+
+        return root.val + rangeSumBST(root.right, L, R) + rangeSumBST(root.left, L, R);
     }
 
+    public static void main(String[] args) {
+
+    }
+
+
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int x) {
+            val = x;
+        }
+    }
 
 }
