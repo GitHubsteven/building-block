@@ -61,20 +61,6 @@ public class LC617 {
         return t1;
     }
 
-    void BFS(TreeNode t1) {
-        if (t1 == null) return;
-        List<TreeNode> totolLeaves = new ArrayList<>();
-        List<TreeNode> curLeaves = new ArrayList<>();
-        //获取当前深度的所有叶子节点
-        curLeaves.add(t1);
-        //遍历循环当前叶子节点，获取其子节点
-        while (curLeaves.size() != 0) {
-            for (TreeNode curLeaf : curLeaves) {
-
-            }
-        }
-    }
-
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         TreeNode three = new TreeNode(3);
@@ -84,6 +70,5 @@ public class LC617 {
         root.right = two;
         three.left = five;
         LC617 treeTest = new LC617();
-        treeTest.BFS(root);
     }
 }

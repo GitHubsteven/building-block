@@ -15,7 +15,8 @@ import java.util.List;
  * 这是非常繁琐和不合理的，这只是一个疑问而已
  * @Date: Created at 16:20 2019/3/22.
  */
-public class AdjacencyTable<T extends Comparable<T>> implements IGraphicOperation2<AdjVertex<T>, AdjArc<T>> {
+public class AdjacencyTable<T extends Comparable<T>> implements
+        IGraphicOperation2<AdjVertex<T>, AdjArc<T>> {
     /**
      * 顶点集合
      */
