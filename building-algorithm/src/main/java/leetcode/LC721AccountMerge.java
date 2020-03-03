@@ -82,6 +82,36 @@ public class LC721AccountMerge {
         }
     }
 
+    /**
+     * timeout
+     *
+     * @param adjacentMatrix
+     * @param isVisited
+     * @param start
+     * @param visitor
+     */
+    public void bfs(boolean[][] adjacentMatrix, boolean[] isVisited, int start, List<Integer> visitor) {
+        if (isVisited[start]) return;
+        List<Integer> cursor = new ArrayList<>();
+        cursor.add(start);
+        List<Integer> temp = new ArrayList<>();
+        while (!cursor.isEmpty()) {
+            visitor.addAll(cursor);
+            for (Integer idx : cursor) {
+                isVisited[idx] = true;
+                for (int i = 0; i < adjacentMatrix[idx].length; i++) {
+                    if (i != idx && adjacentMatrix[idx][i] && !isVisited[i]) {
+                        temp.add(i);
+                    }
+                }
+            }
+            cursor.clear();
+            cursor.addAll(temp);
+            temp.clear();
+        }
+    }
+
+
     private boolean[][] buildAdjacentMatrix(List<List<String>> accounts) {
         int size = accounts.size();
         boolean[][] adjacentMatrix = new boolean[size][size];
