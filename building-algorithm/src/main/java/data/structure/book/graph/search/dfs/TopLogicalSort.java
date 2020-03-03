@@ -8,5 +8,7 @@ package data.structure.book.graph.search.dfs;
  * @Date: Created at 18:36 2020/3/2.
  */
 public class TopLogicalSort {
+    public static void main(String[] args) {
 
+    }
 }
