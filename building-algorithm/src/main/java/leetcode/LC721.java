@@ -1,8 +1,8 @@
 package leetcode;
 
-import javafx.collections.transformation.SortedList;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Authoer: asa.x

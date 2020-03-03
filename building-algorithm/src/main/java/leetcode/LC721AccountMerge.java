@@ -1,16 +1,22 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Authoer: asa.x
  * @Date: 2020/3/1
- * @Descrition:
+ * @Descrition: url: https://leetcode.com/problems/accounts-merge/
  */
 public class LC721AccountMerge {
     public static void main(String[] args) {
-
+        LC721AccountMerge main = new LC721AccountMerge();
+        String[][] accounts = {{"David", "David0@m.co", "David1@m.co"}, {"David", "David3@m.co", "David4@m.co"}, {"David", "David4@m.co", "David5@m.co"}, {"David", "David2@m.co", "David3@m.co"}, {"David", "David1@m.co", "David2@m.co"}};
+        List<List<String>> accountsList = new ArrayList<>();
+        for (String[] account : accounts) {
+            accountsList.add(new ArrayList<>(Arrays.asList(account)));
+        }
+        List<List<String>> accountsMerged = main.accountsMerge(accountsList);
+        System.out.println(accountsMerged);
     }
 
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
@@ -25,14 +31,27 @@ public class LC721AccountMerge {
             List<String> newAccount = mergeAllSameAccounts(accounts, sameAccountIndexes);
             mergedAccounts.add(newAccount);
         }
-        return mergedAccounts;
+        //distinct and sort
+        List<List<String>> finalMergedAccount = new ArrayList<>();
+        for (List<String> mergedAccount : mergedAccounts) {
+            List<String> distinct = new ArrayList<>(new HashSet<>(mergedAccount));
+            distinct.sort(new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareTo(o2);
+                }
+            });
+            finalMergedAccount.add(distinct);
+        }
+        mergedAccounts.clear();
+        return finalMergedAccount;
     }
 
-    private List<String> mergeAllSameAccounts(List<List<String>> allAccount, List<Integer> sameAccountIndex) {
-        List<String> first = allAccount.get(0);
-        for (int i = 1; i < sameAccountIndex.size(); i++) {
-            List<String> second = allAccount.get(i);
-            mergeAccount(first, second);
+    private List<String> mergeAllSameAccounts(final List<List<String>> allAccount, final List<Integer> sameAccountIndex) {
+        if (sameAccountIndex.size() == 1) return allAccount.get(sameAccountIndex.get(0));
+        List<String> first = new ArrayList<>(allAccount.get(sameAccountIndex.get(0)));
+        for (Integer accountIndex : sameAccountIndex) {
+            mergeAccount(first, allAccount.get(accountIndex));
         }
         return first;
     }
@@ -56,22 +75,24 @@ public class LC721AccountMerge {
         if (isVisited[start]) return;
         visitor.add(start);
         isVisited[start] = true;
-        boolean[] directSameAccIndexes = adjacentMatrix[start];
-        for (int idx = 0; idx < directSameAccIndexes.length; idx++) {
-            if (directSameAccIndexes[idx] && !isVisited[idx])
-                dfs(adjacentMatrix, isVisited, start, visitor);
+        boolean[] accountsRelations = adjacentMatrix[start];
+        for (int idx = 0; idx < accountsRelations.length; idx++) {
+            if (idx != start && accountsRelations[idx] && !isVisited[idx])
+                dfs(adjacentMatrix, isVisited, idx, visitor);
         }
     }
 
     private boolean[][] buildAdjacentMatrix(List<List<String>> accounts) {
         int size = accounts.size();
         boolean[][] adjacentMatrix = new boolean[size][size];
-        //O(n*n) to create adjacentMatrix
         for (int i = 0; i < size; i++) {
             List<String> account = accounts.get(i);
             for (int j = i; j < size; j++) {
                 if (i == j) continue;
-                if (isSameAccount(account, accounts.get(j))) adjacentMatrix[i][j] = true;
+                if (isSameAccount(account, accounts.get(j))) {
+                    adjacentMatrix[i][j] = true;
+                    adjacentMatrix[j][i] = true;
+                }
             }
         }
         return adjacentMatrix;
