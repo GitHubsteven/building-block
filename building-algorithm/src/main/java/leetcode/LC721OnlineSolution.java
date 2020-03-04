@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2019 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
- * @Description: url: https://algorithms.tutorialhorizon.com/dynamic-programming-minimum-jumps-to-reach-to-end/
+ * @Description: url: https://algorithms.tutorialhorizon.com/dynamic-programming-minimum-jumps-to-reach-to-end/ 11
  * @Author asa.x
  * @Date: Created at 15:51 2020/3/3.
  */

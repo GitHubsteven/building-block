@@ -10,23 +10,15 @@ import java.util.*;
  */
 public class StackTest {
     public static void main(String[] args) {
-        Stack<Integer> stock = new Stack<>();
-        stock.add(1);
-        stock.add(2);
-        stock.add(3);
+        Stack<Integer> stack = new Stack<>();
 
-        while (!stock.isEmpty()) {
-            System.out.println(stock.pop());
-        }
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
 
-        System.out.println("-----------------------");
-        Deque<Integer> deque = new ArrayDeque<>();
-        deque.push(1);
-        deque.push(2);
-        deque.push(3);
-        while (!deque.isEmpty()) {
-            System.out.println(deque.pollFirst());
-            ;
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
         }
     }
+
 }
