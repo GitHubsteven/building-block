@@ -23,7 +23,7 @@ public class TypeTest {
      *
      * 比如我们定义一个泛型类TestReflect<T>，并在类中定义方法oneMethod(T para)，那么当调用method.getGenericParameterTypes()方法得到的Type数组，数组的元素就是由TypeVariable接口实现的。
      *
-     * 真正的实现类是sun.reflect.generics.reflectiveObjects. TypeVariableImpl。
+     * 真正的实现类是sun.reflect.generics.reflectiveObjects.TypeVariableImpl。
      *
      *
      * @param args
