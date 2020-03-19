@@ -3,3 +3,5 @@
 1. json/bean的转换
 2. xml/bean的转换
 3. java类型之间的强制转化
+
+##### xstream和jacksonXmlMapper的比较
