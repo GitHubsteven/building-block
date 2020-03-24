@@ -7,7 +7,7 @@ import org.apache.http.message.BasicNameValuePair;
 import sun.misc.BASE64Encoder;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -24,20 +24,20 @@ public class MessageDigestDemo {
      * MessageDigest简介 : https://blog.csdn.net/hudashi/article/details/8394158
      */
     public String run(String text) throws NoSuchAlgorithmException {
-        byte data[];
+        byte[] data;
         MessageDigest messageDigest;
         try {
-            data = text.getBytes(Charset.forName("UTF8"));
+            data = text.getBytes(StandardCharsets.UTF_8);
             messageDigest = MessageDigest.getInstance("MD5");
             messageDigest.update(data);
-            byte resultData[] = messageDigest.digest();
+            byte[] resultData = messageDigest.digest();
             return convertToHexString(resultData);
         } catch (NoSuchAlgorithmException e) {
             throw e;
         }
     }
 
-    private static String convertToHexString(byte data[]) {
+    private static String convertToHexString(byte[] data) {
         StringBuilder strBuffer = new StringBuilder();
         for (byte aData : data) {
             strBuffer.append(Integer.toHexString(0xff & aData));
@@ -45,17 +45,15 @@ public class MessageDigestDemo {
         return strBuffer.toString();
     }
 
-    private String md5sumWithEncoder(String text) throws NoSuchAlgorithmException,
-            UnsupportedEncodingException {
+    private String md5sumWithEncoder(String text) throws NoSuchAlgorithmException {
         /*确定计算方法*/
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         BASE64Encoder base64en = new BASE64Encoder();
         /*加密后的散列码字符串*/
-        String strMd5 = base64en.encode(md5.digest(text.getBytes("utf-8")));
-        return strMd5;
+        return base64en.encode(md5.digest(text.getBytes(StandardCharsets.UTF_8)));
     }
 
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main(String[] args) {
         MessageDigestDemo demo = new MessageDigestDemo();
         Object paramObj = getCenturyItemQty();
 

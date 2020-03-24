@@ -1,6 +1,6 @@
 package com.example.encryption;
 
-import java.security.*;
+import java.security.MessageDigest;
 
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
@@ -36,8 +36,14 @@ public class MyDigest {
         }
     }
 
-    private String byte2hex(byte[] b) // 二行制转字符串
-    {
+
+    /**
+     * 二行制转字符串
+     *
+     * @param b 字节数组
+     * @return hex字符串
+     */
+    private String byte2hex(byte[] b) {
         StringBuilder hs = new StringBuilder();
         String stmp = "";
         for (int n = 0; n < b.length; n++) {
