@@ -8,17 +8,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- *
- * @author: jet.xie
- * @Date: 2018/8/24
- * @Time: 20:22
- * @Description:
- * @version: 1.0.0
- */
+ * @author rongbin.xie
+ * @version 1.0.0
+ * @date 2020/6/11
+ * @description
+ * @copyright COPYRIGHT © 2014 - 2020 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
+ **/
 @Data
 @Accessors(chain = true)
-public class Staff implements Serializable {
+public class Worker implements Serializable {
     private String name;
     private Integer age;
     private String position;

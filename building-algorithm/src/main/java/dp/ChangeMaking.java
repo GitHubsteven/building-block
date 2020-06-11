@@ -7,7 +7,7 @@ package dp;
  * @Date: 2018/8/9
  * @Time: 10:18
  * @Description: make up amount n by coins{d1,d2,....,dn}, find the least coins number
- * ps: conis must have coin value 1
+ * ps: coins must have coin value 1
  * @version: 1.0.0
  */
 public class ChangeMaking {
