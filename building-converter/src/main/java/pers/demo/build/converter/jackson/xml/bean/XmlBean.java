@@ -31,6 +31,11 @@ public class XmlBean implements Serializable {
         xmlBean.setName("xmlBean");
         xmlBean.setLocation("SH");
         xmlBean.setFriends(Collections.singletonList("Jackson"));
-        System.out.println(XmlUtils.toXml(xmlBean));
+        String xml = XmlUtils.toXml(xmlBean);
+        System.out.println(xml);
+
+
+        XmlBean fromXmlBean = (XmlBean) XmlUtils.fromXmlViaType(xml, XmlBean.class);
+        System.out.println(fromXmlBean.getFriends().size());
     }
 }

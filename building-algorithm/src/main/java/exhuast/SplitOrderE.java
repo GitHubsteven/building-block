@@ -30,20 +30,21 @@ public class SplitOrderE {
      * 从一组数据中找出最接近某个值的子集集合，有多个返回多个,values的值小于target
      *
      * @param values     集合价值
-     * @param MAX_AMOUNT 子集最大数量
+     * @param maxAmount 子集最大数量
      * @param target     目标值
      * @return 符合情况的子集集合
      */
-    static List<List<Integer>> findCombinesNearVal(List<Integer> values, int MAX_AMOUNT, int target) {
+    static List<List<Integer>> findCombinesNearVal(List<Integer> values, int maxAmount, int target) {
         List<List<Integer>> totalCombines = new ArrayList<>();
-        //找出所有的组合Cm-1,Cm-2,....Cm-m;
-        for (int i = 1; i <= MAX_AMOUNT; i++) {
+        // 找出所有的组合Cm-1,Cm-2,....Cm-m;
+        for (int i = 1; i <= maxAmount; i++) {
             List<List<Integer>> combines = CollectionHelper.combine((int[]) Objects.requireNonNull(CollectionHelper.listNumber2IntArr(values)), i);
             totalCombines.addAll(combines);
         }
-        //找出所有的小于等于target最接近的组合，也许有多个，把所有的都获取出来
-        List<List<Integer>> matchedCombines = new ArrayList<>();     //定义一个符合情形的分组的容器
-        int nearestVal = 0;      //最接近的值
+        // 找出所有的小于等于target最接近的组合，也许有多个，把所有的都获取出来
+        List<List<Integer>> matchedCombines = new ArrayList<>();
+        // 最接近的值
+        int nearestVal = 0;
         for (List<Integer> combine : totalCombines) {
             int sum = combine.stream().mapToInt(it -> it).sum();
             //如果大于目标或者小于当前nearestVal的值，那么跳过

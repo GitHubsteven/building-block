@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+
 /**
  * @version 1.0.0
  * @author: rongbin.xie
@@ -35,6 +38,22 @@ public class XmlUtils {
             return xmlMapper.writeValueAsString(request);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("parse bean to xml error", e);
+        }
+    }
+
+    public static <T> T fromXml(String xmlString, Class<T> clz) {
+        try {
+            return xmlMapper.readValue(xmlString, clz);
+        } catch (IOException e) {
+            throw new RuntimeException("parse xml to bean error", e);
+        }
+    }
+
+    public static Object fromXmlViaType(String xmlString, Type type) {
+        try {
+            return xmlMapper.readValue(xmlString, xmlMapper.constructType(type));
+        } catch (IOException e) {
+            throw new RuntimeException("parse xml to bean error", e);
         }
     }
 }

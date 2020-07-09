@@ -27,6 +27,13 @@ public class CollectionHelper {
         }
     }
 
+    public static void printArray(int[] array) {
+        for (int col : array) {
+            System.out.print(String.format("%2d ", col));
+        }
+        System.out.println();
+    }
+
     public static Integer sumList(Collection<Integer> numbers) {
         Integer sum = 0;
         for (Integer number : numbers) {

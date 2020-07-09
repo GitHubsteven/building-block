@@ -1,7 +1,5 @@
 package leetcode;
 
-import data.structure.book.graph.store.Matrix;
-
 /**
  * @version 1.0.0 COPYRIGHT © 2001 - 2019 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Description: url: https://leetcode.com/problems/01-matrix/
@@ -38,11 +36,13 @@ public class LC54201Matrix {
     }
 
     public static int getPointNearestDis(int row_idx, int col_idx, int[][] matrix, int distance) {
-
+        // TODO: 2020/7/9 实现类
+        return 0;
     }
 
     public static int dfs(int row_idx, int col_idx, int[][] matrix, int distance) {
         if (matrix[row_idx][col_idx] == 0) return 0;
-        if (matrix[row_idx - 1][col_idx] == 0)
+        if (matrix[row_idx - 1][col_idx] == 0) return 0;
+        return 0;
     }
 }
