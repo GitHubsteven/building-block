@@ -15,10 +15,6 @@ public class CusTest {
         testBasedResponse();
     }
 
-
-
-
-
     private static void testBasedResponse() {
         CusBody cusBody = new CusBody();
         cusBody.setCusId("123");

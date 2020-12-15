@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
  */
 @Setter
 @Getter
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BaseBody {
     @XmlElement(name = "id")
     private Long id;

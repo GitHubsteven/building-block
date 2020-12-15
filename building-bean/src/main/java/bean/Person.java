@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class Person {
+public class Person extends BaseModel {
     private String name;
     private Integer age;
 

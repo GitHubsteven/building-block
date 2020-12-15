@@ -11,11 +11,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 
 /**
@@ -35,21 +35,41 @@ public class GetRequestTest {
     /**
      * 这里定制http client
      */
+//    199456 (ms)
     private static final HttpClient client = HttpClientBuilder.create().build();
     private static final Executor executor = Executor.newInstance(client);
 
     public static void main(String[] args) throws Exception {
-        String url = "localhost:8080/wms/test/get-json-obj";
+        String url = "https://qiniufile.voyageone.com.cn/is/image/sneakerhead/928-A57-I0002622-1";
         Request req = Request.Get(url);
-        Person request = new Person("get.request.json", 12);
-        StringEntity stringEntity = new StringEntity(OM.writeValueAsString(request), ContentType.APPLICATION_JSON);
-        req.body(stringEntity);
+//        Person request = new Person("get.request.json", 12);
+//        StringEntity stringEntity = new StringEntity(OM.writeValueAsString(request), ContentType.APPLICATION_JSON);
+//        req.body(stringEntity);
+        String destinationFile = "H:\\temp\\image%s.jpg";
+        final long start = System.currentTimeMillis();
+        for (int i = 0; i < 1000; i++) {
+            Response resp = executor.execute(req);
+            HttpResponse httpResp = resp.returnResponse();
+            HttpEntity entity = httpResp.getEntity();
+            final InputStream is = entity.getContent();
+            OutputStream os = new FileOutputStream(String.format(destinationFile, i));
 
-        Response resp = executor.execute(req);
-        HttpResponse httpResp = resp.returnResponse();
-        HttpEntity entity = httpResp.getEntity();
-        String respStr = EntityUtils.toString(entity);
-        System.out.println(respStr);
+            byte[] b = new byte[2048];
+            int length;
+
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+
+            is.close();
+            os.close();
+        }
+        System.out.println((System.currentTimeMillis() - start) + " (ms)");
+
+//        String respStr = EntityUtils.toString(entity);
+//        System.out.println(respStr);
+
+
     }
 
     @Setter

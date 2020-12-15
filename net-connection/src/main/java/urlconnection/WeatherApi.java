@@ -10,7 +10,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.DefaultBHttpClientConnectionFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
 import java.io.BufferedReader;
@@ -55,6 +57,7 @@ public class WeatherApi extends BaseApiCall {
         } catch (Exception e) {
             System.out.println("调用api失败");
         }
+
     }
 
     public static void callApiByURI(URI uri) throws Exception {
@@ -69,6 +72,7 @@ public class WeatherApi extends BaseApiCall {
 //            String respStr = fromHttpEntity2String(resp.getEntity());
             System.out.println(respStr);
         }
+
 
     }
 

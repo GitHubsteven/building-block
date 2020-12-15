@@ -36,5 +36,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
+        <dependency>
+            <artifactId>building-bean</artifactId>
+            <groupId>com.asa.building</groupId>
+            <version>${build-block-version}</version>
+        </dependency>
     </dependencies>
 </project>
