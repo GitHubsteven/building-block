@@ -18,7 +18,7 @@ import java.io.IOException;
  * @copyright COPYRIGHT © 2014 - 2020 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  **/
 public class DefaultPoolTest {
-    private final static String TEMPLATE = "https://qiniufile.voyageone.com.cn/is/image/sneakerhead/%s?imageView2/0/w/800/h/800/format/jpg";
+    public final static String TEMPLATE = "https://qiniufile.voyageone.com.cn/is/image/sneakerhead/%s?imageView2/0/w/800/h/800/format/jpg";
 
     public static void main(String[] args) throws IOException {
         final String url = String.format(TEMPLATE, "928-A77-182870387754991-1");
@@ -40,8 +40,10 @@ public class DefaultPoolTest {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(100);
         connectionManager.setDefaultMaxPerRoute(20);
+
         try (CloseableHttpClient httpClient = HttpClients.custom()
                 .setConnectionManager(connectionManager)
+//                .setDefaultHeaders("","")
                 .build()) {
             final HttpGet httpGet = new HttpGet(url);
             try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
