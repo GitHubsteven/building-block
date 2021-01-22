@@ -1,16 +1,26 @@
 package http.connect.pool;
 
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.util.PublicSuffixMatcher;
 import org.apache.http.conn.util.PublicSuffixMatcherLoader;
+import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecProvider;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.DefaultCookieSpecProvider;
 import org.apache.http.impl.cookie.RFC6265CookieSpecProvider;
+
+import java.io.IOException;
 
 /**
  * @author rongbin.xie
@@ -38,5 +48,31 @@ public class CustomCookiePolicyTest {
                 .setDefaultCookieSpecRegistry(r)
                 .setDefaultRequestConfig(requestConfig)
                 .build();
+
+        // create a local instance of cookie store
+        CookieStore cookieStore = new BasicCookieStore();
+        // populate cookie if needed
+        BasicClientCookie cookie = new BasicClientCookie("name", "value");
+        cookie.setDomain(".mycompany.com");
+        cookie.setPath("/");
+        cookieStore.addCookie(cookie);
+
+        // set the store
+        final CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultCookieStore(cookieStore)
+                .build();
+
+        // http client
+        HttpGet httpget = new HttpGet("http://somehost/");
+        HttpClientContext context = HttpClientContext.create();
+        context.setCookieStore(cookieStore);
+        context.setCookieSpecRegistry(r);
+        try {
+            final CloseableHttpResponse response = httpClient.execute(httpget);
+            final CookieOrigin cookieOrigin = context.getCookieOrigin();
+            final CookieSpec cookieSpec = context.getCookieSpec();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
