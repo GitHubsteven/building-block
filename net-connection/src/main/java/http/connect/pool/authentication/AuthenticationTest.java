@@ -1,5 +1,8 @@
 package http.connect.pool.authentication;
 
+
+import org.apache.http.auth.UsernamePasswordCredentials;
+
 /**
  * @author rongbin.xie
  * @version 1.0.0
@@ -9,6 +12,8 @@ package http.connect.pool.authentication;
  **/
 public class AuthenticationTest {
     public static void main(String[] args) {
-
+        UsernamePasswordCredentials creds = new UsernamePasswordCredentials("user", "pwd");
+        System.out.println(creds.getUserPrincipal().getName());
+        System.out.println(creds.getPassword());
     }
 }
