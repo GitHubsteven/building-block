@@ -1,6 +1,7 @@
 package http.connect.pool.authentication;
 
 
+import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 /**
@@ -15,5 +16,12 @@ public class AuthenticationTest {
         UsernamePasswordCredentials creds = new UsernamePasswordCredentials("user", "pwd");
         System.out.println(creds.getUserPrincipal().getName());
         System.out.println(creds.getPassword());
+
+        NTCredentials ntCred = new NTCredentials("user", "pwd", "workstation", "domain");
+        System.out.println(ntCred.getUserPrincipal().getName());
+        System.out.println(creds.getPassword());
+
+
+
     }
 }

@@ -1,8 +1,5 @@
 package general;
 
-import util.CollectionHelper;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,16 +12,10 @@ import java.util.List;
  * @version: 1.0.0
  */
 public class MaxSubSet {
-    interface Status {
-        String P2P = "00";
-        String P2N = "01";
-        String N2N = "11";
-        String N2P = "10";
-    }
 
     public static void main(String[] args) {
-        int[] maxSubSet = new int[2];
-        System.out.println(maxSubSet[1]);
+        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println(violence(nums));
     }
 
     /**
@@ -34,11 +25,40 @@ public class MaxSubSet {
      * @return max sum subSet
      */
     static List<Integer> maxSubSet(int[] data) {
-        List<Integer> maxSubSet = new ArrayList<>();
-        List<Integer> negativeSet = new ArrayList<>();
-        List<Integer> curPG = new ArrayList<>();
-        List<Integer> nextPositiveSet = new ArrayList<>();
-        // TODO: 2018/8/9 to realize
         return null;
+    }
+
+    public static int violence(int[] nums) {
+        int maxSum = Integer.MIN_VALUE;
+        int sum;
+        for (int i = 0; i < nums.length; i++) {
+            sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum += nums[j];
+                maxSum = Integer.max(maxSum, sum);
+            }
+        }
+        return maxSum;
+    }
+
+    public static int dp(int[] nums) {
+        int currMaxSum = nums[0];
+        int maxSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currMaxSum = Math.max(currMaxSum + nums[i], nums[i]);
+            maxSum = Math.max(maxSum, currMaxSum);
+        }
+        return maxSum;
+    }
+
+    public int fasterButOccupied(int[] nums) {
+        int maxSub = nums[0], curSum = 0;
+        for (int num : nums) {
+            if (curSum <= 0)
+                curSum = 0;
+            curSum += num;
+            maxSub = Math.max(maxSub, curSum);
+        }
+        return maxSub;
     }
 }
