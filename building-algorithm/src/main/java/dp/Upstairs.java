@@ -11,14 +11,45 @@ package dp;
  */
 public class Upstairs {
     public static void main(String[] args) {
-        System.out.println(upstairs(4));
+//        System.out.println(dp(44));
+        System.out.println(loop2(44));  //1134903170
     }
 
-    static int upstairs(int n) {
-        if (n == 0) return 1;   //0 表示原地不动，也有一种方式
+    static int dp(int n) {
+        //0 表示原地不动，也有一种方式
+        if (n == 0) return 1;
         if (n == 1) return 1;
 
-        int result = upstairs(n - 1) + upstairs(n - 2);
-        return result;
+        return dp(n - 1) + dp(n - 2);
     }
+
+    static int loop(int n) {
+        int[] stairs = new int[n];
+        if (n < 2) {
+            return 1;
+        }
+        stairs[0] = 1;
+        stairs[1] = 2;
+        for (int i = 2; i < n; i++) {
+            stairs[i] = stairs[i - 1] + stairs[i - 2];
+        }
+        return stairs[n - 1];
+    }
+
+    static int loop2(int n) {
+        if (n < 2) {
+            return 1;
+        }
+        if (n == 2) return 2;
+        int n_2 = 1;
+        int n_1 = 2;
+        int cur = 0;
+        for (int i = 2; i < n; i++) {
+            cur = n_1 + n_2;
+            n_2 = n_1;
+            n_1 = cur;
+        }
+        return cur;
+    }
+
 }

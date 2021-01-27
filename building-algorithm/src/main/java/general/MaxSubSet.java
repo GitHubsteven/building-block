@@ -1,14 +1,12 @@
 package general;
 
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  *
  * @author: jet.xie
  * @Date: 2018/8/9
  * @Time: 16:52
- * @Description:
+ * @Description: https://lucifer.ren/blog/2019/12/11/LSS/
  * @version: 1.0.0
  */
 public class MaxSubSet {
@@ -16,16 +14,6 @@ public class MaxSubSet {
     public static void main(String[] args) {
         int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         System.out.println(violence(nums));
-    }
-
-    /**
-     * find the max sum subSet from given collection
-     *
-     * @param data given data collection
-     * @return max sum subSet
-     */
-    static List<Integer> maxSubSet(int[] data) {
-        return null;
     }
 
     public static int violence(int[] nums) {
@@ -60,5 +48,28 @@ public class MaxSubSet {
             maxSub = Math.max(maxSub, curSum);
         }
         return maxSub;
+    }
+
+    /**
+     * 最大连续的子序列，设S(i）=Sum(0,...,i)
+     * 1. 设S(k,j) = maxSum
+     * 2. S(k,j) = S(j) - S(k)
+     * 3. 如果想要S(k,j)->max == Max(Sum(j)) - Min(Sum(k))
+     * <p>
+     * 数据公式上是这样的，但是不知道实际上的数据变化不知道
+     */
+    public int mathAnalyze(int[] nums) {
+        int maxSum = nums[0];
+        int sum = 0;
+        int minSum = 0;
+        for (int num : nums) {
+            // prefix sum
+            sum += num;
+
+            maxSum = Math.max(maxSum, sum - minSum);
+
+            minSum = Math.min(minSum, sum);
+        }
+        return maxSum;
     }
 }
