@@ -16,7 +16,7 @@ public class Lc_42 {
 
     public static int trap(int[] height) {
         final int length = height.length;
-        if (length <= 2) return 0;
+            if (length <= 2) return 0;
         int sum = 0;
         int start_idx = -1;
         // 用于存储每个闭环的积水量，如果有的话
