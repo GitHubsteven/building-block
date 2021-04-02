@@ -17,20 +17,20 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZipUtil {
     public static void main(String[] args) {
-//        extractZip();
-        try {
-            example2();
-            System.out.println("succeed!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        extractZip();
+//        try {
+//            example2();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        System.out.println("succeed!");
     }
 
     private static void extractZip() {
-        Path root = Paths.get("D:\\download");
+        Path root = Paths.get("F:\\TEMP");
         File[] srcFile = new File[2];
         for (int i = 1; i < 3; i++) {
-            Path filePath = root.resolve("E-Finest Co.,Ltd._" + i + ".xlsx");
+            Path filePath = root.resolve("test" + i + ".xlsx");
             File tmp = filePath.toFile();
             srcFile[i - 1] = tmp;
         }
@@ -44,8 +44,9 @@ public class ZipUtil {
         try {
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(
                     zipfile));
+            FileInputStream in;
             for (int i = 0; i < srcfile.length; i++) {
-                FileInputStream in = new FileInputStream(srcfile[i]);
+                in = new FileInputStream(srcfile[i]);
                 out.putNextEntry(new ZipEntry(srcfile[i].getName()));
                 int len;
                 while ((len = in.read(buf)) > 0) {
@@ -59,6 +60,7 @@ public class ZipUtil {
             e.printStackTrace();
         }
     }
+
 
     public static void example2() throws IOException {
         //文件流的目的，这里可以用outpuStream缓存
