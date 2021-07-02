@@ -283,13 +283,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.16.20</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.jsonschema2pojo/jsonschema2pojo-core -->
-            <dependency>
-                <groupId>org.jsonschema2pojo</groupId>
-                <artifactId>jsonschema2pojo-core</artifactId>
-                <version>1.0.2</version>
+                <version>1.18.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -298,7 +292,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
+            <version>1.18.10</version>
         </dependency>
     </dependencies>
 
