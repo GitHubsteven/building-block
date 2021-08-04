@@ -1,4 +1,4 @@
-package leetcode.dp;
+package leetcode.dp.hard;
 
 /**
  * @author rongbin.xie
