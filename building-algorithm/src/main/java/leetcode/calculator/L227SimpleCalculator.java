@@ -11,25 +11,28 @@ import java.util.Stack;
 
 public class L227SimpleCalculator {
     public static void main(String[] args) {
-        String expression = "3+2*2/4+2";
-        int result = calculate(expression);
-        System.out.println(result);
-
-        System.out.println((int) '0');
-        System.out.println((int) '9');
+        String expression = "32";
+        System.out.println(calculate(expression));
     }
 
+    /**
+     * 1. operation _after
+     *
+     * @param expression 表达式
+     * @return 运算结果
+     */
     public static int calculate(String expression) {
+        expression = expression.replaceAll(" ", "");
         Stack<Integer> nums = new Stack<>();
         Stack<Character> ops = new Stack<>();
         int length = expression.length();
+        StringBuilder preNumber = new StringBuilder();
+        StringBuilder nextNumber = new StringBuilder();
         for (int i = 0; i < length; i++) {
             char value = expression.charAt(i);
-            // 空格跳过
-            if (value == ' ') {
-
-            } else if (isNumber(value)) {
+            if (isNumber(value)) {
                 // 数字压入stack
+                preNumber.append(value);
                 nums.push(Character.getNumericValue(value));
             } else {
                 // 操作符
@@ -51,7 +54,6 @@ public class L227SimpleCalculator {
                         ops.push(value);
                     }
                     default: {
-                        System.out.println(value);
                     }
                 }
             }
@@ -84,5 +86,12 @@ public class L227SimpleCalculator {
 
     public static boolean isNumber(char val) {
         return (int) val >= 48 && (int) val <= 57;
+    }
+
+    public static int getNextOperateCharIdx(String expression, int startInclusive) {
+        for (int i = startInclusive; i < expression.length(); i++) {
+            if (!isNumber(expression.charAt(i))) return i;
+        }
+        return expression.length() - 1;
     }
 }
