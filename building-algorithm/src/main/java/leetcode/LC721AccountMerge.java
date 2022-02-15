@@ -35,12 +35,7 @@ public class LC721AccountMerge {
         List<List<String>> finalMergedAccount = new ArrayList<>();
         for (List<String> mergedAccount : mergedAccounts) {
             List<String> distinct = new ArrayList<>(new HashSet<>(mergedAccount));
-            distinct.sort(new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    return o1.compareTo(o2);
-                }
-            });
+            distinct.sort((o1, o2) -> o1.compareTo(o2));
             finalMergedAccount.add(distinct);
         }
         mergedAccounts.clear();
