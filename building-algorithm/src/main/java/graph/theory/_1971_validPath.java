@@ -14,8 +14,8 @@ import java.util.Set;
  **/
 public class _1971_validPath {
     public static void main(String[] args) {
-        int n = 30000, start = 18473, end = 26690;
-        int[][] edges = {{0, 1}, {0, 2}, {1, 2}};
+        int n = 5, start = 0, end = 0;
+        int[][] edges = {{0, 0}};
 
         System.out.println(validPath(n, edges, start, end));
     }
@@ -36,7 +36,7 @@ public class _1971_validPath {
     }
 
     static boolean isCurConnected(boolean[][] isConnected, int cur, int source, boolean[] hasVisited) {
-        System.out.println(cur);
+        if (cur == source) return true;
         if (cur < 0) return false;
         if (cur >= isConnected.length) return false;
         if (isConnected[cur][source]) {
@@ -51,7 +51,6 @@ public class _1971_validPath {
                 hasVisited[i] = true;
                 isArrive = isCurConnected(isConnected, i, source, hasVisited);
                 if (isArrive) break;
-                hasVisited[i] = true;
             }
         }
         hasVisited[cur] = true;
