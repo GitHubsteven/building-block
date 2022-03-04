@@ -1,11 +1,10 @@
 package structure.queue;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.DelayQueue;
-import java.util.concurrent.Delayed;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author rongbin.xie
@@ -15,21 +14,30 @@ import java.util.concurrent.TimeUnit;
  * @copyright COPYRIGHT © 2014 - 2021/5/18 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  **/
 public class DelayQueueTest {
-    public static void main(String[] args) {
-        List<XTask> xTasks = new ArrayList<>();
 
-        DelayQueue<XTask> queue = new DelayQueue<>(xTasks);
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<XDelayTask> queue = new DelayQueue<>();
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+
+        int numberOfElementsToProduce = 2;
+        int delayOfEachProducedMessageMilliseconds = 500;
+
+        DelayQueueConsumer consumer = new DelayQueueConsumer(queue, numberOfElementsToProduce);
+        DelayQueueProducer producer = new DelayQueueProducer(
+                queue, numberOfElementsToProduce, delayOfEachProducedMessageMilliseconds);
+
+        // when
+        executor.submit(producer);
+        executor.submit(consumer);
+
+        // then
+        executor.awaitTermination(5, TimeUnit.SECONDS);
+        executor.shutdown();
+
+        assertEquals(consumer.numberOfConsumedElements.get(), numberOfElementsToProduce);
     }
 
-    public static class XTask implements Delayed {
-        @Override
-        public long getDelay(TimeUnit unit) {
-            return 1;
-        }
 
-        @Override
-        public int compareTo(Delayed o) {
-            return 0;
-        }
-    }
 }
