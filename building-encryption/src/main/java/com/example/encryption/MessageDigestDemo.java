@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.message.BasicNameValuePair;
 import sun.misc.BASE64Encoder;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -23,7 +22,7 @@ public class MessageDigestDemo {
     /**
      * MessageDigest简介 : https://blog.csdn.net/hudashi/article/details/8394158
      */
-    public String run(String text) throws NoSuchAlgorithmException {
+    public static String run(String text) throws NoSuchAlgorithmException {
         byte[] data;
         MessageDigest messageDigest;
         try {
@@ -53,7 +52,12 @@ public class MessageDigestDemo {
         return base64en.encode(md5.digest(text.getBytes(StandardCharsets.UTF_8)));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        String text = "hello,world";
+        System.out.println(run(text));
+    }
+
+    private static void checkSignTest() {
         MessageDigestDemo demo = new MessageDigestDemo();
         Object paramObj = getCenturyItemQty();
 
