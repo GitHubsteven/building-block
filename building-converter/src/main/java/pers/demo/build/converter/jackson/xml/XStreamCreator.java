@@ -14,8 +14,8 @@ import com.thoughtworks.xstream.converters.basic.IntConverter;
 import com.thoughtworks.xstream.converters.basic.LongConverter;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import com.voyageone.ecerp.common.util.DateTimeUtils;
-import com.voyageone.ecerp.common.util.StringUtils;
+import converter.json.jackson.DateTimeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -42,7 +42,7 @@ public class XStreamCreator {
 
             @Override
             public Object fromString(String str) {
-                if (StringUtils.isNullOrBlank2(str)) {
+                if (StringUtils.isAllBlank(str)) {
                     return null;
                 }
                 return super.fromString(str);
@@ -52,7 +52,7 @@ public class XStreamCreator {
 
             @Override
             public Object fromString(String str) {
-                if (StringUtils.isNullOrBlank2(str)) {
+                if (StringUtils.isAllBlank(str)) {
                     return null;
                 }
                 return super.fromString(str);
@@ -62,7 +62,7 @@ public class XStreamCreator {
 
             @Override
             public Object fromString(String str) {
-                if (StringUtils.isNullOrBlank2(str)) {
+                if (StringUtils.isAllBlank(str)) {
                     return null;
                 }
                 return super.fromString(str);
@@ -73,7 +73,7 @@ public class XStreamCreator {
 
             @Override
             public Object fromString(String str) {
-                if (StringUtils.isNullOrBlank2(str)) {
+                if (StringUtils.isAllBlank(str)) {
                     return null;
                 } else {
                     return DateTimeUtils.parse(str, DateTimeUtils.DEFAULT_DATETIME_FORMAT);
@@ -124,7 +124,7 @@ public class XStreamCreator {
         @Override
         public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
             String value = reader.getValue();
-            if (!StringUtils.isNullOrBlank2(value)) {
+            if (!StringUtils.isAllBlank(value)) {
                 try {
                     return analysisRespMapResult(value);
                 } catch (Exception e) {

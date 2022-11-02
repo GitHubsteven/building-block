@@ -1,10 +1,8 @@
 package dp;
 
-import javafx.scene.AmbientLight;
 import util.CollectionHelper;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.

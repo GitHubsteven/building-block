@@ -13,7 +13,7 @@ public class LC1 {
         int target = 6;
         final int[] idxes = twoSum(nums, target);
         assert idxes != null;
-        System.out.println(String.format("%d %d", idxes[0], idxes[1]));
+        System.out.printf("%d %d%n", idxes[0], idxes[1]);
     }
 
     public static int[] twoSum(int[] nums, int target) {

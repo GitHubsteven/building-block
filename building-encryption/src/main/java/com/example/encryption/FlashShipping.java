@@ -1,6 +1,6 @@
 package com.example.encryption;
 
-import com.voyageone.ecerp.common.util.JacksonUtils;
+import converter.json.jackson.JacksonUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.message.BasicNameValuePair;
