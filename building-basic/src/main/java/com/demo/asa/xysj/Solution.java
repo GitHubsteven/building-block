@@ -47,7 +47,9 @@ public class Solution {
     }
 
     public static String getString(int rangeIntVal) {
-        return rangeIntVal >= 0 && rangeIntVal <= 9 ? String.valueOf(rangeIntVal) : String.valueOf((char) (rangeIntVal + 55)); // A = 65 = 55 + 10;
+        return rangeIntVal >= 0 && rangeIntVal <= 9
+                ? String.valueOf(rangeIntVal) : String.valueOf((char) (rangeIntVal + 55));
+        // A = 65 = 55 + 10;
 
     }
 }
