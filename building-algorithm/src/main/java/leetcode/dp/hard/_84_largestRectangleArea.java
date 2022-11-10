@@ -5,8 +5,14 @@ import java.util.Deque;
 
 public class _84_largestRectangleArea {
     public static void main(String[] args) {
-        int[] heights = {2, 1, 5, 6, 2, 3};
-        System.out.println(largestRectangleArea(heights));
+//        int[] heights = {2, 1, 5, 6, 2, 3};
+//        System.out.println(largestRectangleArea(heights));
+
+        Deque<Integer> queue = new ArrayDeque<>();
+        queue.push(1);
+        queue.push(2);
+        System.out.println(queue.pop());
+
     }
 
     /**

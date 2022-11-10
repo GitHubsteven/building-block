@@ -7,6 +7,10 @@ package leetcode.dp.easy;
  */
 public class Lc_121 {
     public static void main(String[] args) {
+        ThreadLocal<Object> cache = new ThreadLocal<>();
+        cache.set("a");
+        cache.get();
+
         int[] prices = {7, 6, 4, 3, 1};
         System.out.println(dp(prices));
     }

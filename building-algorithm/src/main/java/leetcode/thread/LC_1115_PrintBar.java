@@ -9,14 +9,27 @@ package leetcode.thread;
  **/
 public class LC_1115_PrintBar {
     public static void main(String[] args) throws InterruptedException {
-        FooBar fooBar = new FooBar(10);
+        FooBar fooBar = new FooBar(5);
 
-        fooBar.foo(() -> {
-            System.out.print("foo");
+        Thread t1 = new Thread(() -> {
+            try {
+                fooBar.foo(() -> System.out.println("foo"));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
 
-        fooBar.bar(() -> {
-            System.out.print("bar");
+
+        Thread t2 = new Thread(() -> {
+            try {
+                fooBar.bar(() -> System.out.println("bar"));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
+
+
+        t2.start();
+        t1.start();
     }
 }

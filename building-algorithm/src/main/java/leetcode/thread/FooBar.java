@@ -11,10 +11,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * @copyright COPYRIGHT © 2014 - 2021/5/18 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  **/
 class FooBar {
-    private static Lock lock = new ReentrantLock(true);
-    private static boolean isFoo = true;
+    private static final Lock lock = new ReentrantLock(true);
+    private volatile boolean isFoo = true;
 
-    private int n;
+    private final int n;
 
     public FooBar(int n) {
         this.n = n;

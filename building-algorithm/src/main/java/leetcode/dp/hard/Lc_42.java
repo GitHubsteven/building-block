@@ -14,6 +14,11 @@ public class Lc_42 {
     }
 
 
+    /**
+     * not ac
+     * @param height
+     * @return
+     */
     public static int trap(int[] height) {
         final int length = height.length;
             if (length <= 2) return 0;

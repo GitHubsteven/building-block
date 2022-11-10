@@ -29,7 +29,7 @@ public class BusinessServiceTest {
             for (int i = 1; i <= 10; i++) {
                 String threadName = Thread.currentThread().getName();
                 service.functionSet(threadName, i);
-                System.out.println("Thread [" + threadName + "]" + "Get data:" + String.valueOf(service.continueFunctionSet()));
+                System.out.println("Thread [" + threadName + "]" + "Get data:" + service.continueFunctionSet());
             }
         }
     }

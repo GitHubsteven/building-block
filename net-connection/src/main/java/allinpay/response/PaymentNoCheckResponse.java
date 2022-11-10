@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 import java.util.Objects;
 
 /**
- * @version 1.0.0 COPYRIGHT © 2001 - 2018 VOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
+ * @version 1.0.0 COPYRIGHT © 2001 - 2018 fooVOYAGE ONE GROUP INC. ALL RIGHTS RESERVED.
  * @Author jet.xie
  * @Description: 支付单查询接口
  * @Date: Created at 13:42 2018/10/30.

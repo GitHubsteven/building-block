@@ -49,7 +49,7 @@ public class ThreadDebug {
                 if (i == 3) {
                     try {
                         System.out.println(getName() + "sleep 2000ms");
-                        this.sleep(2000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

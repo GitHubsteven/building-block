@@ -11,14 +11,17 @@ import java.util.concurrent.BlockingQueue;
  */
 public class QueueTest {
     public static void main(String[] args) {
-        BlockingQueue queue = new ArrayBlockingQueue(10);
+        BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(2);
         queue.add(1);
         queue.add(2);
-        queue.add(3);
+        queue.offer(3);
+
+        System.out.println(queue.poll());
 
         while (!queue.isEmpty()) {
             System.out.println(queue.poll());
-            ;
         }
+
+
     }
 }

@@ -1,80 +1,125 @@
+/**
+ * @author: asx
+ * @date: 2022/10/26
+ * @descrition:
+ */
 package com.demo.asa.map;
 
-import lombok.EqualsAndHashCode;
+import java.util.*;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
-@EqualsAndHashCode
+/**
+ * map,定义一个二维数组，put一个key,value保存下来
+ * get: 查询
+ * insert: 插入
+ */
+@SuppressWarnings("unchecked")
 public class AMap<K, V> implements Map<K, V> {
+    private int size = 8;
 
-    public static class LinkNode {
-        Object key;
-        Object value;
+    private int occupiedSize = 0;
 
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(key) * 31 + Objects.hash(value) * 31;
-        }
+    private Object[] keys = new Object[size];
+
+    private Object[] values = new Object[size];
+
+
+    public AMap(int size) {
+        this.size = size;
     }
 
-
-    public static class TreeNode {
-        Object key;
-
-        Object value;
-
-        TreeNode leftChild;
-
-        TreeNode rightChild;
-
-        @Override
-        public int hashCode() {
-            return super.hashCode();
-        }
+    public AMap() {
     }
-
-
-    private volatile int size = 0;
-
-    private volatile int[] keys = {};
-
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public boolean containsKey(Object key) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(key, keys[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean containsValue(Object value) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(value, values[i])) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public V get(Object key) {
-        return null;
+        int keyIdx = findKeyIdx(key);
+        return keyIdx == -1 ? null : (V) values[keyIdx];
     }
 
     @Override
     public V put(K key, V value) {
-        return null;
+        // 查询key是否存在
+        int keyIdx = findKeyIdx(key);
+        // 判断是否存在，存在的话，更新，不存在插入
+        if (keyIdx >= 0) {
+            values[keyIdx] = value;
+        }
+        // 插入，判断是否需要扩容
+        if (this.occupiedSize >= size) {
+            //扩容
+            Object[] newKeys = new Object[size + 16];
+            System.arraycopy(keys, 0, newKeys, 0, size);
+            Object[] newValues = new Object[size + 16];
+            System.arraycopy(values, 0, newValues, 0, size);
+            // 重新赋值
+            this.keys = newKeys;
+            this.values = newValues;
+            this.keys[size] = key;
+            this.values[size] = value;
+            // 重置map的相关信息
+            size += 16;
+        } else {
+            // 不需要扩容
+            for (int i = 0; i < size; i++) {
+                if (keys[i] == null) {
+                    keys[i] = key;
+                    values[i] = value;
+                    break;
+                }
+            }
+        }
+        occupiedSize++;
+        return value;
     }
+
+
+    private int findKeyIdx(Object key) {
+        for (int i = 0; i < size; i++) {
+            if (Objects.equals(key, keys[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
     @Override
     public V remove(Object key) {
-        return null;
+        int keyIdx = findKeyIdx(key);
+        keys[keyIdx] = null;
+        V value = (V) values[keyIdx];
+        values[keyIdx] = null;
+        return value;
     }
 
     @Override
@@ -84,7 +129,10 @@ public class AMap<K, V> implements Map<K, V> {
 
     @Override
     public void clear() {
-
+        this.occupiedSize = 0;
+        this.size = 8;
+        Arrays.fill(this.keys, null);
+        Arrays.fill(this.values, null);
     }
 
     @Override
@@ -101,6 +149,4 @@ public class AMap<K, V> implements Map<K, V> {
     public Set<Entry<K, V>> entrySet() {
         return null;
     }
-
-
 }
