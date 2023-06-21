@@ -33,7 +33,7 @@ public class DelayQueueTest {
         executor.submit(consumer);
 
         // then
-        executor.awaitTermination(5, TimeUnit.SECONDS);
+        boolean isSuccess = executor.awaitTermination(5, TimeUnit.SECONDS);
         executor.shutdown();
 
         assertEquals(consumer.numberOfConsumedElements.get(), numberOfElementsToProduce);

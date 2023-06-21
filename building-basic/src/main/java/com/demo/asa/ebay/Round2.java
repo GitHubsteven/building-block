@@ -5,8 +5,6 @@
  */
 package com.demo.asa.ebay;
 
-import java.util.List;
-
 public class Round2 {
     public static void main(String[] args) {
 
@@ -30,7 +28,7 @@ public class Round2 {
     }
 
     /**
-     * 0,1,2,3,4,5,6
+     * 0,1,2,3,4,5,6we
      *
      * @param x
      * @return

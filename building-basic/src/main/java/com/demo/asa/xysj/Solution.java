@@ -18,7 +18,7 @@ public class Solution {
         // 1. 数字 - 48
         // 2. 字母的话 -65
         for (int i = 7280; i <= 7299; i++) {
-            System.out.println(i +" -> " + numToString(7280));
+            System.out.println(i + " -> " + numToString(7280));
         }
 
     }
