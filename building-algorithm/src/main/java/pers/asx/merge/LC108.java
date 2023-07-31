@@ -9,7 +9,7 @@ package pers.asx.merge;
 /**
  * @author: asx
  * @date: 2023/6/30
- * @descrition:
+ * @descrition: https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
  */
 public class LC108 {
     public static void main(String[] args) {

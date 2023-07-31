@@ -15,6 +15,14 @@ public class SubModel1 extends BaseModel {
     private String name = "bean.SubModel1";
     private Integer age;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getAge() {
         return age;
     }
