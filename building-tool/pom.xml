@@ -75,6 +75,22 @@
             <artifactId>webp-imageio</artifactId>
             <version>0.1.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>QLExpress</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.groupdocs</groupId>-->
+        <!--            <artifactId>groupdocs-comparison</artifactId>-->
+        <!--            <version>20.4</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-pdf-cloud</artifactId>
+            <version>23.7.0</version>
+        </dependency>
 
     </dependencies>
 
